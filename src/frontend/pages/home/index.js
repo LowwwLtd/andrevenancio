@@ -4,7 +4,7 @@ import { debounce } from 'app/utils/debounce';
 import { Canvas } from './backup';
 import './style.scss';
 
-export class SoonPage extends PureComponent {
+export class HomePage extends PureComponent {
     domElement = React.createRef();
 
     componentDidMount() {
@@ -53,16 +53,14 @@ export class SoonPage extends PureComponent {
 
     render() {
         return (
-            <div className="soon">
-                {true && (
-                    <div className="content">
-                        <h1>Hello</h1>
-                        <p>
-                            I&apos;m André 👋, a Senior Creative Developer based
-                            in London.
-                        </p>
-                    </div>
-                )}
+            <div className="home">
+                <div className="content">
+                    <h1>Hello</h1>
+                    <p>
+                        I&apos;m André 👋, a Senior Creative Developer based in
+                        London.
+                    </p>
+                </div>
 
                 <canvas ref={this.domElement} />
             </div>

@@ -6,7 +6,7 @@
     padding: 32px;
     color: white;
     display: flex;
-    align-items: flex-start;
+    align-items: flex-end;
     justify-content: space-between;
     flex-direction: column;
     z-index: 1000;
@@ -18,7 +18,7 @@
         padding: 6px 8px 4px;
         background-color: white;
         color: black;
-        margin-right: 16px;
+        margin-left: 16px;
         text-decoration: none;
 
         &.logo {
@@ -42,10 +42,5 @@
     @media only screen and (min-width: 768px) {
         align-items: center;
         flex-direction: initial;
-
-        a {
-            margin-left: 16px;
-            margin-right: initial;
-        }
     }
 }

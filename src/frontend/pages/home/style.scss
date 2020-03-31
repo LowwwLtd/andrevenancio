@@ -1,0 +1,50 @@
+.home {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+
+    canvas {
+        display: block;
+    }
+
+    .content {
+        position: absolute;
+        right: 32px;
+        bottom: 32px;
+        width: calc(100% - 64px);
+        display: flex;
+        align-items: flex-end;
+        justify-content: flex-end;
+        flex-direction: column;
+
+        h1 {
+            font-family: 'SpaceGrotesk-Bold';
+            font-size: 140px;
+            line-height: 140px;
+            text-align: right;
+        }
+
+        p {
+            width: 340px;
+            font-size: 18px;
+            letter-spacing: 0;
+            color: #dedede;
+            text-align: right;
+        }
+
+        @media only screen and (min-width: 768px) {
+            width: 470px;
+            h1 {
+                font-size: 200px;
+                line-height: 200px;
+            }
+            p {
+                width: 440px;
+            }
+        }
+    }
+}
