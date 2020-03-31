@@ -1,0 +1,30 @@
+.wave {
+    display: inline-block;
+    transform: rotate(0);
+    transform-origin: 70% 70%;
+    animation: wave 5s infinite;
+}
+
+@keyframes wave {
+    0% {
+        transform: rotate(0deg);
+    }
+    5% {
+        transform: rotate(-10deg);
+    }
+    10% {
+        transform: rotate(12deg);
+    }
+    15% {
+        transform: rotate(-10deg);
+    }
+    20% {
+        transform: rotate(9deg);
+    }
+    25% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(0deg);
+    }
+}

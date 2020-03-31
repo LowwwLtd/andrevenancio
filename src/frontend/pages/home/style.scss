@@ -29,7 +29,6 @@
         }
 
         p {
-            width: 340px;
             font-size: 18px;
             letter-spacing: 0;
             color: #dedede;
@@ -37,13 +36,9 @@
         }
 
         @media only screen and (min-width: 768px) {
-            width: 470px;
             h1 {
                 font-size: 200px;
                 line-height: 200px;
-            }
-            p {
-                width: 440px;
             }
         }
     }

@@ -1,0 +1,53 @@
+h1 {
+    font-family: 'SpaceGrotesk-Bold';
+    font-size: 64px;
+}
+
+h2 {
+    font-family: 'SpaceGrotesk-Bold';
+    font-size: 24px;
+}
+
+h3 {
+    font-family: 'SpaceGrotesk-Regular';
+    font-size: 16px;
+}
+
+p {
+    font-family: 'SpaceGrotesk-Light';
+    line-height: 24px;
+    line-height: 24px;
+    margin-bottom: 16px;
+}
+
+a {
+    color: white;
+    text-decoration: underline;
+    &:hover {
+        text-decoration: none;
+    }
+}
+
+.strike {
+    text-decoration: line-through;
+}
+
+.underline {
+    text-decoration: underline;
+}
+
+.spacer-xl {
+    margin-bottom: 64px;
+}
+
+.spacer-l {
+    margin-bottom: 32px;
+}
+
+.spacer-m {
+    margin-bottom: 16px;
+}
+
+.spacer-s {
+    margin-bottom: 8px;
+}

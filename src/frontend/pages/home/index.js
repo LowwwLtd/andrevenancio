@@ -57,8 +57,11 @@ export class HomePage extends PureComponent {
                 <div className="content">
                     <h1>Hello</h1>
                     <p>
-                        I&apos;m André 👋, a Senior Creative Developer based in
-                        London.
+                        I&apos;m André{' '}
+                        <span role="img" aria-label="wave" className="wave">
+                            👋🏻
+                        </span>
+                        , a Senior Creative Developer based in London.
                     </p>
                 </div>
 

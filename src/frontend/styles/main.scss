@@ -16,66 +16,28 @@ body {
     -webkit-font-smoothing: antialiased;
 }
 
-.strike {
-    text-decoration: line-through;
-}
-.underline {
-    text-decoration: underline;
+section {
+    margin: 0 32px;
 }
 
-@font-face {
-    font-family: 'SpaceGrotesk-Bold';
-    src: url('/fonts/SpaceGrotesk-Bold.woff2') format('woff2'),
-        url('/fonts/SpaceGrotesk-Bold.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
+ul {
+    list-style: none;
+
+    li {
+        display: inline-block;
+        background-color: #202022;
+        font-size: 14px;
+        border-radius: 6px;
+        padding: 4px 10px;
+        margin-right: 4px;
+        margin-bottom: 4px;
+    }
 }
 
-@font-face {
-    font-family: 'SpaceGrotesk-Regular';
-    src: url('/fonts/SpaceGrotesk-Regular.woff2') format('woff2'),
-        url('/fonts/SpaceGrotesk-Regular.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-}
+nav {
+    display: flex;
 
-@font-face {
-    font-family: 'SpaceGrotesk-Light';
-    src: url('/fonts/SpaceGrotesk-Light.woff2') format('woff2'),
-        url('/fonts/SpaceGrotesk-Light.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-}
-
-h1 {
-    font-family: 'SpaceGrotesk-Bold';
-    font-size: 64px;
-}
-
-h2 {
-    font-family: 'SpaceGrotesk-Bold';
-    font-size: 24px;
-    margin-top: 64px;
-    margin-bottom: 8px;
-}
-
-h3 {
-    font-family: 'SpaceGrotesk-Regular';
-    font-size: 16px;
-    margin-top: 24px;
-    margin-bottom: 8px;
-}
-
-p {
-    font-family: 'SpaceGrotesk-Light';
-    line-height: 24px;
-    margin: 16px 0;
-}
-
-a {
-    color: white;
-    text-decoration: underline;
-    &:hover {
-        text-decoration: none;
+    a {
+        margin-right: 4px;
     }
 }

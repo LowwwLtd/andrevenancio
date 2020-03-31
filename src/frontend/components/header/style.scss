@@ -11,6 +11,12 @@
     flex-direction: column;
     z-index: 1000;
 
+    nav {
+        a {
+            margin-right: initial;
+        }
+    }
+
     a {
         display: block;
         font-family: 'SpaceGrotesk-Bold';
@@ -22,7 +28,7 @@
         text-decoration: none;
 
         &.logo {
-            font-family: 'SpaceGrotesk-Bold';
+            font-family: 'SpaceGrotesk-Regular';
             padding: 4px 0;
             font-size: 16px;
             background-color: initial;
@@ -33,10 +39,6 @@
         &.active {
             color: #151517;
         }
-    }
-
-    nav {
-        display: flex;
     }
 
     @media only screen and (min-width: 768px) {
