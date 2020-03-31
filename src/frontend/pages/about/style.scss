@@ -7,18 +7,29 @@
     &__content {
         display: flex;
         align-items: flex-start;
-        padding: 0 32px;
+        flex-direction: column;
 
         img {
-            width: calc(50% - 32px);
+            width: 100%;
             height: auto;
         }
 
         section {
-            width: calc(50% - 32px);
+            width: calc(100% - 64px);
+            margin: 32px;
         }
 
         @media only screen and (min-width: 768px) {
+            flex-direction: initial;
+            img {
+                width: calc(50% - 32px);
+                margin: 0 0 0 32px;
+            }
+
+            section {
+                width: calc(50% - 32px);
+                margin: 0 32px;
+            }
         }
 
         @media only screen and (min-width: 1440px) {
