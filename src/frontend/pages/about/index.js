@@ -14,8 +14,8 @@ export class AboutPage extends PureComponent {
                             <span role="img" aria-label="wave" className="wave">
                                 👋🏻
                             </span>{' '}
-                            my name is André Venâncio, and I’m a Freelance
-                            Senior Creative Developer and judge at the{' '}
+                            my name is André Venâncio, and I’m a Senior Creative
+                            Developer and judge at the{' '}
                             <a
                                 href="https://thefwa.com"
                                 target="_blank"

@@ -1,7 +1,7 @@
+/* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
-import { Link } from 'react-router-dom';
-import imageUrlBuilder from '@sanity/image-url';
-import { client, GET_ALL_POSTS, useSanityFetch } from 'app/sanity';
+import { GET_ALL_POSTS, useSanityFetch } from 'app/sanity';
+import { Thumbnail } from 'app/components/thumbnail';
 import './style.scss';
 
 export const WorkPage = () => {
@@ -10,36 +10,9 @@ export const WorkPage = () => {
         <div className="work">
             <div className="work__content">
                 {result &&
-                    result.map(
-                        ({
-                            _id,
-                            mainImage,
-                            title = '',
-                            slug = '',
-                            _updatedAt = '',
-                        }) => {
-                            return (
-                                <Link key={_id} to={`/work/${slug.current}`}>
-                                    <img
-                                        src={imageUrlBuilder(client)
-                                            .image(mainImage)
-                                            .url()}
-                                        alt={`${title}`}
-                                    />
-                                    <div className="info">
-                                        <div className="title">{title}</div>
-                                        {false && (
-                                            <div className="date">
-                                                {new Date(
-                                                    _updatedAt
-                                                ).toDateString()}
-                                            </div>
-                                        )}
-                                    </div>
-                                </Link>
-                            );
-                        }
-                    )}
+                    result.map(props => (
+                        <Thumbnail key={props._id} {...props} />
+                    ))}
             </div>
         </div>
     );
