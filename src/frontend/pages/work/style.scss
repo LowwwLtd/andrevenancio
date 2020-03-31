@@ -48,6 +48,19 @@
                 }
             }
 
+            @media (hover: none) {
+                img {
+                    opacity: 1;
+                    filter: grayscale(0%);
+                }
+
+                .info {
+                    .title {
+                        opacity: 1;
+                    }
+                }
+            }
+
             &:hover,
             &:active,
             &:focus {
