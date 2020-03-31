@@ -48,7 +48,9 @@
                 }
             }
 
-            &:hover {
+            &:hover,
+            &:active,
+            &:focus {
                 img {
                     opacity: 1;
                     filter: grayscale(0%);
