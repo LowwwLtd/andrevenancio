@@ -1,6 +1,5 @@
 /* eslint-disable jsx-a11y/accessible-emoji */
 import React, { PureComponent } from 'react';
-import { Link } from 'react-router-dom';
 import { debounce } from 'app/utils/debounce';
 import { Canvas } from './backup';
 import './style.scss';
