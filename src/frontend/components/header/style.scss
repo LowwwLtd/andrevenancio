@@ -22,27 +22,43 @@
         font-family: 'SpaceGrotesk-Bold';
         font-size: 16px;
         padding: 6px 8px 4px;
-        background-color: white;
-        color: black;
+        background-color: #151517;
+        color: white;
         margin-left: 16px;
         text-decoration: none;
+        transition: all 0.3s ease-in-out;
 
         &.logo {
             font-family: 'SpaceGrotesk-Regular';
             padding: 4px 0;
             font-size: 16px;
+            color: #999999;
             background-color: initial;
-            color: white;
             margin-left: initial;
+            margin-bottom: 10px;
         }
 
+        &:hover,
         &.active {
             color: #151517;
+            background-color: white;
+
+            &.logo {
+                background-color: initial;
+                color: white;
+            }
         }
     }
 
-    @media only screen and (min-width: 768px) {
+    @media only screen and (min-width: 321px) {
+        margin-bottom: initial;
         align-items: center;
         flex-direction: initial;
+
+        a {
+            &.logo {
+                margin-bottom: 0;
+            }
+        }
     }
 }

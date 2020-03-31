@@ -37,25 +37,29 @@ const workDetailClass = ({ match }) => {
     return (
         <article className="work-detail">
             <div className="work-detail__content">
-                <h1>{title}</h1>
+                <h1 className="spacer-l">{title}</h1>
                 {info && (
-                    <div className="info">
-                        <span>
-                            Client: <strong>{info.client}</strong>{' '}
-                        </span>
-                        <span>
-                            Agency: <strong>{info.agency}</strong>
-                        </span>
-                        <span>
-                            Year: <strong>{info.year}</strong>{' '}
-                        </span>
-                        <span>
-                            Role: <strong>{info.role}</strong>{' '}
-                        </span>
+                    <div className="spacer-m info">
+                        <div>
+                            <span>Client:</span>{' '}
+                            <span className="highlight">{info.client}</span>{' '}
+                        </div>
+                        <div>
+                            <span>Agency:</span>{' '}
+                            <span className="highlight">{info.agency}</span>
+                        </div>
+                        <div>
+                            <span>Year:</span>{' '}
+                            <span className="highlight">{info.year}</span>{' '}
+                        </div>
+                        <div>
+                            <span>Role:</span>{' '}
+                            <span className="highlight">{info.role}</span>{' '}
+                        </div>
                     </div>
                 )}
                 {technology && (
-                    <ul>
+                    <ul className="spacer-xl">
                         {technology.map(tech => (
                             <li key={tech}>{tech}</li>
                         ))}
