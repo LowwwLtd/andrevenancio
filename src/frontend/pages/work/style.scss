@@ -7,7 +7,7 @@
     &__content {
         display: grid;
         grid-gap: 0px;
-        grid-template-columns: repeat(1, 1fr);
+        grid-template-columns: repeat(2, 1fr);
 
         a {
             position: relative;
@@ -15,8 +15,8 @@
             align-items: center;
             justify-content: center;
             flex-direction: column;
-            width: calc(100vw);
-            height: calc(100vw);
+            width: 50vw;
+            height: 50vw;
             box-sizing: border-box;
             background-color: #202022;
             color: white;
