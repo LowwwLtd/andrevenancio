@@ -1,0 +1,85 @@
+.work {
+    display: inline-block;
+    width: 100%;
+    min-height: 100vh;
+    padding: 128px 0;
+
+    &__content {
+        display: grid;
+        grid-gap: 0px;
+        grid-template-columns: repeat(1, 1fr);
+
+        a {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            width: calc(100vw);
+            height: calc(100vw);
+            box-sizing: border-box;
+            background-color: #202022;
+            color: white;
+            overflow: hidden;
+
+            img {
+                opacity: 0.8;
+                width: 100%;
+                filter: grayscale(100%);
+                transition: all 0.5s ease-in-out;
+            }
+
+            .info {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                padding: 16px;
+                display: flex;
+                align-items: flex-start;
+                justify-content: flex-start;
+
+                .title {
+                    font-size: 16px;
+                    opacity: 0.5;
+                    color: white;
+                    transition: all 0.3s ease-in-out;
+                }
+            }
+
+            &:hover {
+                img {
+                    opacity: 1;
+                    filter: grayscale(0%);
+                    transform: scale(1.1);
+                }
+
+                .info {
+                    .title {
+                        opacity: 1;
+                    }
+                }
+            }
+        }
+
+        @media only screen and (min-width: 768px) {
+            grid-template-columns: repeat(4, 1fr);
+
+            a {
+                width: calc(100vw / 4);
+                height: calc(100vw / 4);
+            }
+        }
+
+        @media only screen and (min-width: 1440px) {
+            width: 1440px;
+            margin: 0 auto;
+
+            a {
+                width: calc(1440px / 4);
+                height: calc(1440px / 4);
+            }
+        }
+    }
+}

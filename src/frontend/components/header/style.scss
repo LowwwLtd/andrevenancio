@@ -1,0 +1,51 @@
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    padding: 32px;
+    color: white;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    flex-direction: column;
+    z-index: 1000;
+
+    a {
+        display: block;
+        font-family: 'SpaceGrotesk-Bold';
+        font-size: 16px;
+        padding: 6px 8px 4px;
+        background-color: white;
+        color: black;
+        margin-right: 16px;
+        text-decoration: none;
+
+        &.logo {
+            font-family: 'SpaceGrotesk-Bold';
+            padding: 4px 0;
+            font-size: 16px;
+            background-color: initial;
+            color: white;
+            margin-left: initial;
+        }
+
+        &.active {
+            color: #151517;
+        }
+    }
+
+    nav {
+        display: flex;
+    }
+
+    @media only screen and (min-width: 768px) {
+        align-items: center;
+        flex-direction: initial;
+
+        a {
+            margin-left: 16px;
+            margin-right: initial;
+        }
+    }
+}

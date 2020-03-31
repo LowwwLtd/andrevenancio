@@ -1,0 +1,47 @@
+.work-detail {
+    display: inline-block;
+    width: 100%;
+    min-height: 100vh;
+    padding: 128px 0;
+
+    &__content {
+        padding: 0 32px;
+
+        ul {
+            list-style: none;
+            margin: 16px 0;
+
+            li {
+                display: inline-block;
+                background-color: #202022;
+                font-size: 14px;
+                border-radius: 6px;
+                padding: 4px 10px;
+                margin-top: 4px;
+                margin-right: 4px;
+                margin-bottom: 4px;
+            }
+        }
+
+        .info {
+            display: flex;
+            flex-direction: column;
+
+            & > span {
+                margin-right: 16px;
+            }
+        }
+
+        @media only screen and (min-width: 768px) {
+            .info {
+                flex-direction: initial;
+                width: 100%;
+            }
+        }
+
+        @media only screen and (min-width: 1440px) {
+            width: 1440px;
+            margin: 0 auto;
+        }
+    }
+}

@@ -12,5 +12,7 @@ export const GET_POST = groq`*[_type == "post" && slug.current == $postId][0]{
     "name": author->name,
     "categories": categories[]->title,
     "authorImage": author->image,
+    info,
+    "technology": technology[]->title,
     body
   }`;

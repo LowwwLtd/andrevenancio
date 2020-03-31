@@ -1,5 +1,5 @@
 {
-    "name": "portfolio",
+    "name": "andrevenancio",
     "version": "1.0.0",
     "description": "personal portfolio",
     "main": "server.js",
@@ -25,12 +25,13 @@
         "classnames": "^2.2.6",
         "concurrently": "^5.1.0",
         "groq": "^1.149.0",
+        "gsap": "^3.2.6",
         "history": "^4.10.1",
         "prop-types": "^15.7.2",
         "react": "^16.13.1",
         "react-dom": "^16.13.1",
         "react-router-dom": "^5.1.2",
-        "react-syntax-highlighter": "^12.2.1"
+        "react-transition-group": "^4.3.0"
     },
     "devDependencies": {
         "@babel/core": "^7.9.0",

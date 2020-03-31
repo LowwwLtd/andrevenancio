@@ -1,0 +1,50 @@
+.about {
+    display: inline-block;
+    width: 100%;
+    min-height: 100vh;
+    padding: 128px 0;
+
+    &__content {
+        h2,
+        h3,
+        p,
+        ul,
+        nav {
+            padding: 0 32px;
+        }
+
+        ul {
+            list-style: none;
+
+            li {
+                display: inline-block;
+                background-color: #202022;
+                font-size: 14px;
+                border-radius: 6px;
+                padding: 4px 10px;
+                margin-right: 4px;
+                margin-bottom: 4px;
+            }
+        }
+
+        nav {
+            display: flex;
+            flex-direction: column;
+            a {
+                margin: 4px 0;
+            }
+        }
+
+        img {
+            width: 100%;
+        }
+
+        @media only screen and (min-width: 768px) {
+        }
+
+        @media only screen and (min-width: 1440px) {
+            width: 1440px;
+            margin: 0 auto;
+        }
+    }
+}

@@ -1,6 +1,6 @@
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
-const { PATH_STATIC, PATH_DIST, PATH_SOURCE } = require('../config.js');
+const { PATH_STATIC, PATH_DIST } = require('../config.js');
 
 module.exports = new CopyWebpackPlugin([
     {
