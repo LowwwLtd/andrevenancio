@@ -103,7 +103,9 @@ const workDetailClass = ({ match }) => {
                         </div>
                     )}
                 </section>
-                <Vimeo url="https://player.vimeo.com/video/402755677" />
+                {false && (
+                    <Vimeo url="https://player.vimeo.com/video/402755677" />
+                )}
             </div>
         </article>
     );
