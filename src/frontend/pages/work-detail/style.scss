@@ -7,7 +7,6 @@
     &__content {
         .hero {
             height: calc(100vw * 9 / 16);
-            margin-bottom: 32px;
             background-color: #202022;
 
             img {
@@ -15,6 +14,9 @@
             }
         }
         section {
+            margin-top: 32px;
+            margin-bottom: 32px;
+
             .info {
                 display: flex;
                 flex-direction: column;
@@ -31,6 +33,9 @@
             }
             .technology {
                 margin: 32px 0;
+            }
+            .block {
+                margin-bottom: 64px;
             }
         }
         @media only screen and (min-width: 768px) {

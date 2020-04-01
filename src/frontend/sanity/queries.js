@@ -15,4 +15,5 @@ export const GET_POST = groq`*[_type == "post" && slug.current == $postId][0]{
     info,
     body,
     gallery,
+    vimeo,
   }`;

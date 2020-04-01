@@ -1,19 +1,16 @@
-.embed-container {
+.vimeo {
     --video--width: 1920;
     --video--height: 1080;
-
     position: relative;
-    padding-bottom: calc(
-        var(--video--height) / var(--video--width) * 100%
-    ); /* 41.66666667% */
+    padding-bottom: calc(var(--video--height) / var(--video--width) * 100%);
     overflow: hidden;
     max-width: 100%;
     background: black;
 }
 
-.embed-container iframe,
-.embed-container object,
-.embed-container embed {
+.vimeo iframe,
+.vimeo object,
+.vimeo embed {
     position: absolute;
     top: 0;
     left: 0;

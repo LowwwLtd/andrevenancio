@@ -9,14 +9,18 @@ import { Loader } from 'app/components/loader';
 import './style.scss';
 
 export const Thumbnail = ({
-    thumbnail,
+    mainImage,
     title = '',
     slug = '',
     _updatedAt = '',
 }) => {
     const domElement = useRef();
     const src = imageUrlBuilder(client)
-        .image(thumbnail)
+        .image(mainImage)
+        .crop('center')
+        .fit('crop')
+        .width(512)
+        .height(512)
         .url();
 
     const [loaded, setLoaded] = useState(false);

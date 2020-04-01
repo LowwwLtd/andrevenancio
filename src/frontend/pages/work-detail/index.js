@@ -34,10 +34,8 @@ const workDetailClass = ({ match }) => {
     const { postId } = (match && match.params) || {};
     const { result } = useSanityFetch(GET_POST, { postId });
 
-    const { title, info, body, technology, mainImage } = result || {};
-    if (body) {
-        console.log(body.gallery);
-    }
+    const { title, info, body, technology, mainImage, vimeo } = result || {};
+    console.log('main', mainImage);
     return (
         <article className="work-detail">
             <div className="work-detail__content">
@@ -45,6 +43,10 @@ const workDetailClass = ({ match }) => {
                     <img
                         src={imageUrlBuilder(client)
                             .image(mainImage)
+                            .crop('center')
+                            .fit('crop')
+                            .width(256)
+                            .height(256)
                             .url()}
                         alt={title}
                     />
@@ -103,9 +105,7 @@ const workDetailClass = ({ match }) => {
                         </div>
                     )}
                 </section>
-                {false && (
-                    <Vimeo url="https://player.vimeo.com/video/402755677" />
-                )}
+                {vimeo && <Vimeo url={vimeo} />}
             </div>
         </article>
     );
