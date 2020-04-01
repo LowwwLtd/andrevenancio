@@ -6,8 +6,13 @@
 
     &__content {
         .hero {
-            width: 100%;
+            height: calc(100vw * 9 / 16);
             margin-bottom: 32px;
+            background-color: #202022;
+
+            img {
+                width: 100%;
+            }
         }
         section {
             .info {
@@ -18,11 +23,9 @@
                     display: flex;
                     min-width: 200px;
 
-                    span {
-                        &.highlight {
-                            margin-left: 8px;
-                            font-family: 'SpaceGrotesk-Bold';
-                        }
+                    .highlight {
+                        margin-left: 8px;
+                        font-family: 'SpaceGrotesk-Bold';
                     }
                 }
             }

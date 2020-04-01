@@ -38,13 +38,14 @@ const workDetailClass = ({ match }) => {
     return (
         <article className="work-detail">
             <div className="work-detail__content">
-                <img
-                    className="hero"
-                    src={imageUrlBuilder(client)
-                        .image(mainImage)
-                        .url()}
-                    alt={title}
-                />
+                <div className="hero">
+                    <img
+                        src={imageUrlBuilder(client)
+                            .image(mainImage)
+                            .url()}
+                        alt={title}
+                    />
+                </div>
                 <section>
                     <h1>{title}</h1>
                     {info && (
@@ -65,6 +66,19 @@ const workDetailClass = ({ match }) => {
                                 <span>Role:</span>{' '}
                                 <span className="highlight">{info.role}</span>{' '}
                             </div>
+                            {info.href && (
+                                <div>
+                                    <span>URL:</span>{' '}
+                                    <a
+                                        href={info.href}
+                                        target="_blank"
+                                        className="highlight"
+                                        rel="noopener noreferrer"
+                                    >
+                                        {info.href}
+                                    </a>
+                                </div>
+                            )}
                         </div>
                     )}
                     {technology && (
