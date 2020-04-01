@@ -3,7 +3,6 @@ import { HomePage } from 'app/pages/home';
 import { WorkPage } from 'app/pages/work';
 import { WorkDetailPage } from 'app/pages/work-detail';
 import { AboutPage } from 'app/pages/about';
-import { TestPage } from 'app/pages/test';
 
 export const routes = [
     {
@@ -24,9 +23,5 @@ export const routes = [
     {
         path: '/about',
         child: <AboutPage />,
-    },
-    {
-        path: '/test',
-        child: <TestPage />,
     },
 ];

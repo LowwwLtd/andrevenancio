@@ -5,6 +5,7 @@ import { withRouter } from 'react-router-dom';
 import imageUrlBuilder from '@sanity/image-url';
 import BlockContent from '@sanity/block-content-to-react';
 import { client, useSanityFetch, GET_POST } from 'app/sanity';
+import { Vimeo } from 'app/components/vimeo';
 import './style.scss';
 
 const serializers = {
@@ -34,7 +35,9 @@ const workDetailClass = ({ match }) => {
     const { result } = useSanityFetch(GET_POST, { postId });
 
     const { title, info, body, technology, mainImage } = result || {};
-    // body.gallery
+    if (body) {
+        console.log(body.gallery);
+    }
     return (
         <article className="work-detail">
             <div className="work-detail__content">
@@ -88,6 +91,7 @@ const workDetailClass = ({ match }) => {
                             ))}
                         </ul>
                     )}
+
                     {body && (
                         <div className="block">
                             <BlockContent
@@ -99,6 +103,7 @@ const workDetailClass = ({ match }) => {
                         </div>
                     )}
                 </section>
+                <Vimeo url="https://player.vimeo.com/video/402755677" />
             </div>
         </article>
     );
