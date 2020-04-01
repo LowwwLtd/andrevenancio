@@ -5,28 +5,30 @@
     padding: 128px 0;
 
     &__content {
-        padding: 0 32px;
-
-        .info {
-            display: flex;
-            flex-direction: column;
-
-            & > div {
+        .hero {
+            width: 100%;
+            margin-bottom: 32px;
+        }
+        section {
+            .info {
                 display: flex;
-                min-width: 200px;
+                flex-direction: column;
 
-                span {
-                    &.highlight {
-                        margin-left: 8px;
-                        font-family: 'SpaceGrotesk-Bold';
+                & > div {
+                    display: flex;
+                    min-width: 200px;
+
+                    span {
+                        &.highlight {
+                            margin-left: 8px;
+                            font-family: 'SpaceGrotesk-Bold';
+                        }
                     }
                 }
             }
-        }
-
-        @media only screen and (min-width: 768px) {
-            // max-width: 60%; TODO: uncomment this when an image is added
-            // border: 1px dashed white;
+            .technology {
+                margin: 32px 0;
+            }
         }
 
         @media only screen and (min-width: 1440px) {

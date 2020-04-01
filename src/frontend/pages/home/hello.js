@@ -1,0 +1,25 @@
+// https://www.babbel.com/en/magazine/how-to-say-hello-in-10-different-languages
+export const hello = () => [
+    'Hello',
+    'Bonjour',
+    'Hola',
+    'Zdravstvuyte',
+    '您好', // Chinese
+    'Salve',
+    'Konnichiwa',
+    'Guten Tag',
+    'Olá',
+    'Anyoung haseyo',
+    'Asalaam alaikum',
+    'Goddag',
+    'Shikamoo',
+    'Goedendag',
+    'Yassas',
+    'Dzień dobry',
+    'Selamat siang',
+    'Namaste, Namaskar',
+    'Merhaba',
+    'Shalom',
+    'God dag',
+    'God dag',
+];

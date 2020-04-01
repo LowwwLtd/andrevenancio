@@ -4,19 +4,19 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import classnames from 'classnames';
 import imageUrlBuilder from '@sanity/image-url';
-import { client, GET_ALL_POSTS, useSanityFetch } from 'app/sanity';
+import { client } from 'app/sanity';
 import { Loader } from 'app/components/loader';
 import './style.scss';
 
 export const Thumbnail = ({
-    mainImage,
+    thumbnail,
     title = '',
     slug = '',
     _updatedAt = '',
 }) => {
     const domElement = useRef();
     const src = imageUrlBuilder(client)
-        .image(mainImage)
+        .image(thumbnail)
         .url();
 
     const [loaded, setLoaded] = useState(false);

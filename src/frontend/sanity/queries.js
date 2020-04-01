@@ -9,10 +9,10 @@ export const GET_ALL_POSTS = groq`
 
 export const GET_POST = groq`*[_type == "post" && slug.current == $postId][0]{
     title,
-    "name": author->name,
+    mainImage,
     "categories": categories[]->title,
-    "authorImage": author->image,
-    info,
     "technology": technology[]->title,
-    body
+    info,
+    body,
+    gallery,
   }`;

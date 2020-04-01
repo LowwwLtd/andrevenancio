@@ -8,7 +8,7 @@ export class AboutPage extends PureComponent {
                 <div className="about__content">
                     <img src="/img/about.jpg" alt="André Venâncio" />
                     <section>
-                        <h2 className="spacer-l">Bio</h2>
+                        <h2>Bio</h2>
                         <p>
                             Hello{' '}
                             <span role="img" aria-label="wave" className="wave">
@@ -33,7 +33,7 @@ export class AboutPage extends PureComponent {
                             technology focusing on high quality 2D & 3D
                             applications for web, mobile & installations.
                         </p>
-                        <p className="spacer-l">
+                        <p>
                             I’m constantly enhancing my knowledge and I aim to
                             learn more day after day and stay on the forefront
                             of the new web technologies. I’m focused on creating
@@ -43,9 +43,9 @@ export class AboutPage extends PureComponent {
                             develop online experiences that leave a lasting
                             impression.
                         </p>
-                        <h2 className="spacer-l">Tools & Technologies</h2>
-                        <h3 className="spacer-s">Languages:</h3>
-                        <ul className="spacer-l">
+                        <h2>Tools & Technologies</h2>
+                        <h3>Languages:</h3>
+                        <ul>
                             <li>HTML5</li>
                             <li>Javascript</li>
                             <li>CSS3</li>
@@ -54,15 +54,15 @@ export class AboutPage extends PureComponent {
                             <li>GLSL</li>
                             <li>TypeScript</li>
                         </ul>
-                        <h3 className="spacer-s">Frameworks:</h3>
-                        <ul className="spacer-l">
+                        <h3>Frameworks:</h3>
+                        <ul>
                             <li>React.js</li>
                             <li>Three.js</li>
                             <li>Pixi.js</li>
                             <li>Processing</li>
                             <li>Node.js</li>
                         </ul>
-                        <h2 className="spacer-l">Contacts</h2>
+                        <h2>Contacts</h2>
                         <nav>
                             <a
                                 href="https://twitter.com/andrevenancio"
