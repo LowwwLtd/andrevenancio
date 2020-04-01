@@ -43,10 +43,6 @@ const workDetailClass = ({ match }) => {
                     <img
                         src={imageUrlBuilder(client)
                             .image(mainImage)
-                            .crop('center')
-                            .fit('crop')
-                            .width(256)
-                            .height(256)
                             .url()}
                         alt={title}
                     />
