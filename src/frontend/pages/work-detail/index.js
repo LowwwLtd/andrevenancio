@@ -35,7 +35,6 @@ const workDetailClass = ({ match }) => {
     const { result } = useSanityFetch(GET_POST, { postId });
 
     const { title, info, body, technology, mainImage, vimeo } = result || {};
-    console.log('main', mainImage);
     return (
         <article className="work-detail">
             <div className="work-detail__content">
