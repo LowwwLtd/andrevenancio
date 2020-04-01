@@ -93,7 +93,6 @@ const workDetailClass = ({ match }) => {
                         <div className="block">
                             <BlockContent
                                 blocks={body}
-                                imageOptions={{ w: 320, h: 240, fit: 'max' }}
                                 serializers={serializers}
                                 {...client.config()}
                             />
