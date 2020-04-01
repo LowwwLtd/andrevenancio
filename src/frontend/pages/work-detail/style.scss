@@ -30,38 +30,38 @@
                         font-family: 'SpaceGrotesk-Bold';
                     }
                 }
+
+                .url {
+                    margin: 32px 0 0;
+                    background-color: white;
+                    color: #202020;
+                    padding: 10px 40px;
+                    font-family: 'SpaceGrotesk-Bold';
+                    text-decoration: none;
+                    transition: all 0.3s ease-in-out;
+
+                    &:hover {
+                        background-color: #202020;
+                        color: white;
+                    }
+                }
+
+                .offline {
+                    margin: 32px 0 0;
+                    font-family: 'SpaceGrotesk-Bold';
+                }
             }
             .technology {
                 margin: 32px 0;
             }
+
             .block {
                 margin-bottom: 64px;
-
-                img {
-                    width: calc(100% + 64px);
-                    margin: 64px 0;
-                    margin-left: -32px;
-                }
             }
         }
         @media only screen and (min-width: 768px) {
             section {
-                .block {
-                    h1,
-                    h2,
-                    h3,
-                    h4,
-                    h5,
-                    h6,
-                    p {
-                        width: 50%;
-                    }
-
-                    img {
-                        // width: 50%;
-                    }
-                }
-                // width: 50%;
+                width: 50%;
             }
         }
 

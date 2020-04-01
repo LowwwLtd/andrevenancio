@@ -3,7 +3,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import classnames from 'classnames';
-import imageUrlBuilder from '@sanity/image-url';
+import imageUrl from '@sanity/image-url';
 import { client } from 'app/sanity';
 import { Loader } from 'app/components/loader';
 import './style.scss';
@@ -15,7 +15,7 @@ export const Thumbnail = ({
     _updatedAt = '',
 }) => {
     const domElement = useRef();
-    const src = imageUrlBuilder(client)
+    const src = imageUrl(client)
         .image(mainImage)
         .crop('center')
         .fit('crop')
