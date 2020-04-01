@@ -23,6 +23,7 @@ $base-parallax-perspective: 8px;
     overflow-y: scroll;
     perspective: $base-parallax-perspective;
     perspective-origin: 0%;
+    -webkit-overflow-scrolling: touch;
 }
 
 .image {
