@@ -4,15 +4,19 @@
     justify-content: center;
     flex-direction: column;
     width: 100vw;
-    height: 100vh;
     overflow: hidden;
 
     canvas {
         display: block;
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
     }
 
     .content {
-        position: absolute;
+        position: fixed;
         right: 32px;
         bottom: 32px;
         width: calc(100% - 64px);
