@@ -6,6 +6,7 @@ import './style.scss';
 
 export const WorkPage = () => {
     const { result } = useSanityFetch(GET_ALL_POSTS);
+    console.log(GET_ALL_POSTS, result);
     return (
         <div className="work">
             <div className="work__content">
