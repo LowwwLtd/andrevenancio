@@ -9,11 +9,14 @@
         align-items: flex-start;
         flex-direction: column;
 
-        img {
+        .img {
             width: 100%;
-            height: auto;
-        }
 
+            img {
+                width: 100%;
+                height: auto;
+            }
+        }
         section {
             width: calc(100% - 64px);
             margin: 32px;
@@ -21,9 +24,9 @@
 
         @media only screen and (min-width: 768px) {
             flex-direction: initial;
-            img {
-                width: calc(50% - 32px);
-                margin: 0 0 0 32px;
+
+            .img {
+                width: 50%;
             }
 
             section {

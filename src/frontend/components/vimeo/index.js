@@ -6,8 +6,10 @@ import './style.scss';
 export const Vimeo = ({ url }) => {
     const player = url.replace('vimeo.com/', 'player.vimeo.com/video/');
     return (
-        <div className="vimeo">
-            <iframe src={player} frameBorder="0" allowFullScreen />
+        <div className="vimeo-holder">
+            <div className="vimeo">
+                <iframe src={player} frameBorder="0" allowFullScreen />
+            </div>
         </div>
     );
 };

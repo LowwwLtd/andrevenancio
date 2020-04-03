@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
 import { withRouter, Route } from 'react-router-dom';
 import { CSSTransition } from 'react-transition-group';

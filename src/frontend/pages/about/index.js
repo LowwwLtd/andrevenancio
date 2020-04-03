@@ -6,7 +6,9 @@ export class AboutPage extends PureComponent {
         return (
             <div className="about">
                 <div className="about__content">
-                    <img src="/img/about.jpg" alt="André Venâncio" />
+                    <div className="img">
+                        <img src="/img/about.jpg" alt="André Venâncio" />
+                    </div>
                     <section>
                         <h2>Bio</h2>
                         <p>

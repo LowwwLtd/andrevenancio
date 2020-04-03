@@ -24,6 +24,7 @@
         "@sanity/image-url": "^0.140.17",
         "classnames": "^2.2.6",
         "concurrently": "^5.1.0",
+        "dat.gui": "^0.7.6",
         "groq": "^1.149.0",
         "gsap": "^3.2.6",
         "history": "^4.10.1",
@@ -31,7 +32,8 @@
         "react": "^16.13.1",
         "react-dom": "^16.13.1",
         "react-router-dom": "^5.1.2",
-        "react-transition-group": "^4.3.0"
+        "react-transition-group": "^4.3.0",
+        "three": "^0.115.0"
     },
     "devDependencies": {
         "@babel/core": "^7.9.0",

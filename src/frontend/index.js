@@ -1,6 +1,7 @@
 import React from 'react';
 import { render } from 'react-dom';
 import { Router } from 'react-router-dom';
+import { gsap, CSSPlugin } from 'gsap';
 
 import history from 'app/history';
 import Application from 'app/application';
@@ -24,6 +25,8 @@ const start = () => {
     ];
 
     console.log(...args);
+
+    gsap.registerPlugin(CSSPlugin);
 
     render(
         <Router history={history}>
