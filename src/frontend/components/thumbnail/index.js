@@ -27,6 +27,7 @@ export const Thumbnail = ({ mainImage, title = '', slug = '' }) => {
             domElement.current.appendChild(img);
 
             mask.current.style = 'clip-path: inset(0 0 0 0)';
+            mask.current.style = '-webkit-clip-path: inset(0 0 0 0)';
             const tween = { value: 0 };
             TweenLite.fromTo(
                 tween,
@@ -40,6 +41,7 @@ export const Thumbnail = ({ mainImage, title = '', slug = '' }) => {
                     ease: 'Power2.easeInOut',
                     onUpdate: () => {
                         mask.current.style = `clip-path: inset(0 0 0 ${tween.value}%)`;
+                        mask.current.style = `-webkit-clip-path: inset(0 0 0 ${tween.value}%)`;
                     },
                     onComplete: () => {
                         setLoaded(true);
