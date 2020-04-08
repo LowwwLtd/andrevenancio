@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react';
+import { VFXImage } from 'app/components/vfx/elements';
 import './style.scss';
 
 export class AboutPage extends PureComponent {
@@ -7,7 +8,7 @@ export class AboutPage extends PureComponent {
             <div className="about">
                 <div className="about__content">
                     <div className="img">
-                        <img src="/img/about.jpg" alt="André Venâncio" />
+                        <VFXImage src="/img/about.jpg" alt="André Venâncio" />
                     </div>
                     <section>
                         <h2>Bio</h2>
@@ -66,12 +67,20 @@ export class AboutPage extends PureComponent {
                         </ul>
                         <h2>Contacts</h2>
                         <nav>
+                            {' '}
                             <a
-                                href="https://twitter.com/andrevenancio"
+                                href="https://www.linkedin.com/in/andrevenancio/"
                                 target="_blank"
                                 rel="noopener noreferrer"
                             >
-                                Twitter
+                                Linkedin
+                            </a>
+                            <a
+                                href="mailto:info@andrevenancio.com?subject=Hello%20from%20andrevenancio.com&body=Hi%20Andr%C3%A9%0D%0A"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
+                                Email
                             </a>
                             <a
                                 href="https://github.com/andrevenancio"
@@ -81,11 +90,11 @@ export class AboutPage extends PureComponent {
                                 Github
                             </a>
                             <a
-                                href="https://www.linkedin.com/in/andrevenancio/"
+                                href="https://twitter.com/andrevenancio"
                                 target="_blank"
                                 rel="noopener noreferrer"
                             >
-                                LinkedIN
+                                Twitter
                             </a>
                         </nav>
                     </section>

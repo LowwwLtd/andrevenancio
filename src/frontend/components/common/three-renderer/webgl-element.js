@@ -1,8 +1,7 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React, { PureComponent } from 'react';
-import { EffectContext } from './effect-context';
+import { Context } from './context';
 import { ImageBlock } from './image-block';
-import { ExampleImage } from './example-image';
 
 export class WebGLElement extends PureComponent {
     // Switch to check the type:
@@ -11,8 +10,6 @@ export class WebGLElement extends PureComponent {
         switch (props.type) {
             case 'image':
                 return <ImageBlock {...contextValues} {...props} />;
-            case 'example-image':
-                return <ExampleImage {...contextValues} {...props} />;
             default:
                 return false;
         }
@@ -20,11 +17,11 @@ export class WebGLElement extends PureComponent {
 
     render() {
         return (
-            <EffectContext.Consumer>
-                {contextValues =>
+            <Context.Consumer>
+                {(contextValues) =>
                     this.getComponent({ ...contextValues }, this.props)
                 }
-            </EffectContext.Consumer>
+            </Context.Consumer>
         );
     }
 }

@@ -1,35 +1,28 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
-import { withRouter, Route } from 'react-router-dom';
-import { CSSTransition } from 'react-transition-group';
+import { withRouter, Switch, Route } from 'react-router-dom';
+import { Transition, fade } from 'snap-transition';
 import { routes } from 'app/routes';
 import { Header } from 'app/components/header';
-import './style.scss';
+// import { VFX } from 'app/components/vfx';
 
-const Application = () => {
+const Application = ({ location }) => {
     return (
         <>
             <Header />
-            <>
-                {routes.map(route => (
-                    <Route
-                        key={`component-${route.path}`}
-                        path={route.path}
-                        exact={route.exact}
-                    >
-                        {({ match }) => (
-                            <CSSTransition
-                                in={match != null}
-                                timeout={500}
-                                classNames="fade"
-                                unmountOnExit
-                            >
-                                {route.child}
-                            </CSSTransition>
-                        )}
-                    </Route>
-                ))}
-            </>
+            <Transition location={location} type={fade()}>
+                <Switch location={location}>
+                    {routes.map((route) => (
+                        <Route
+                            key={`component-${route.path}`}
+                            path={route.path}
+                            exact={route.exact}
+                        >
+                            {route.child}
+                        </Route>
+                    ))}
+                </Switch>
+            </Transition>
         </>
     );
 };

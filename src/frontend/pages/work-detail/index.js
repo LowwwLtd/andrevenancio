@@ -1,12 +1,13 @@
 /* eslint-disable react/jsx-props-no-spreading */
 /* eslint-disable react/prop-types */
-import React from 'react';
+import React, { useEffect } from 'react';
 import { withRouter } from 'react-router-dom';
 import imageUrl from '@sanity/image-url';
 import BlockContent from '@sanity/block-content-to-react';
 import { client, useSanityFetch, GET_POST } from 'app/sanity';
 import { Vimeo } from 'app/components/vimeo';
 import { Gallery } from 'app/components/gallery';
+import { VFXImage } from 'app/components/vfx/elements';
 import './style.scss';
 
 const serializers = {
@@ -17,16 +18,18 @@ const workDetailClass = ({ match }) => {
     const { postId } = (match && match.params) || {};
     const { result } = useSanityFetch(GET_POST, { postId });
 
+    useEffect(() => {
+        global.scrollTo(0, 0);
+    }, []);
+
     const { title, info, body, technology, mainImage, gallery, vimeo } =
         result || {};
     return (
         <article className="work-detail">
             <div className="work-detail__content">
                 <div className="hero">
-                    <img
-                        src={imageUrl(client)
-                            .image(mainImage)
-                            .url()}
+                    <VFXImage
+                        src={imageUrl(client).image(mainImage).url()}
                         alt={title}
                     />
                 </div>
@@ -67,7 +70,7 @@ const workDetailClass = ({ match }) => {
                     )}
                     {technology && (
                         <ul className="technology">
-                            {technology.map(tech => (
+                            {technology.map((tech) => (
                                 <li key={tech}>{tech}</li>
                             ))}
                         </ul>

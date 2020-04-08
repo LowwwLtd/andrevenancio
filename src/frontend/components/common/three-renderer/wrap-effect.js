@@ -7,7 +7,7 @@ export class WrapEffect {
         this.velocity = 0;
     }
 
-    update = isScrolling => {
+    update = (isScrolling) => {
         // update velocity
         this.scrollingContainer =
             this.scrollingContainer ||

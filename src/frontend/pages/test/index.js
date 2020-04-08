@@ -4,56 +4,22 @@ import { WebGL, WebGLElement } from 'app/components/common/three-renderer';
 import './style.scss';
 
 export const TestPage = () => {
-    const data = {
-        images: [
-            {
-                title: 'How it works',
-                url:
-                    'https://dom-to-webgl.s3.amazonaws.com/nadine-shaabana-3YYiDD_4Xg4.jpg',
-                copy:
-                    "Under the hood we are taking normal react components and rendering those first. Then we have another component that wraps specific elements and recreates them in webgl using their position & color / texture for the mesh. The original DOM element is at opacity 0 so it's technically always there and we can use it when needed as a fallback.",
-            },
-            {
-                title: 'Fallbacks',
-                url:
-                    'https://dom-to-webgl.s3.amazonaws.com/bruno-cervera-JP8HPBcmWO0.jpg',
-                copy:
-                    "Some devices might not support specific features you're using, or maybe performance isn't great - or maybe the design calls for more static elements on mobile. Either way you always have a fallback and can easily switch off the webgl layer and re-enable the original DOM element.",
-            },
-            {
-                title: 'Other possibilities',
-                url:
-                    'https://dom-to-webgl.s3.amazonaws.com/alex-simpson-e8kYjCQctr4.jpg',
-                copy:
-                    'This is kept simple for this example but the principals are the same and can be applied to many things including other DOM elements like divs, text, videos.',
-            },
-            {
-                title: 'Learn more',
-                url:
-                    'https://dom-to-webgl.s3.amazonaws.com/alexander-pozdeev-uGVQ3Qing0s.jpg',
-                copy:
-                    'Finishing up an article that will go into more details about this feature as well as the rest of the tech details for the new Firstborn.com - stay tuned!',
-            },
-        ],
-        examples: [
-            {
-                url:
-                    'https://dom-to-webgl.s3.amazonaws.com/luke-witter-4D7-9lVUvNY.jpg',
-            },
-            {
-                url:
-                    'https://dom-to-webgl.s3.amazonaws.com/william-navarro-QpgISxTjsqY.jpg',
-            },
-            {
-                url:
-                    'https://dom-to-webgl.s3.amazonaws.com/markus-spiske-j2yvpBdmGyg.jpg',
-            },
-        ],
-    };
+    const data = [
+        {
+            url:
+                'https://cdn.sanity.io/images/zhaneedf/production/f4bc8a8659a40f2e40b6c72c2f536049022a73f4-1920x1080.jpg',
+        },
+        {
+            url:
+                'https://cdn.sanity.io/images/zhaneedf/production/255526d55f726502d0dd01ed17872beca47e288b-1920x1080.jpg?rect=0,0,1920,1078',
+        },
+    ];
     return (
         <div className="test">
             <WebGL>
-                {data.images.map((contentBlock, i) => {
+                <h1>This is a test</h1>
+                <p>Make sure you scroll</p>
+                {data.map((contentBlock, i) => {
                     return (
                         <WebGLElement
                             key={`im${i}`}
@@ -62,17 +28,6 @@ export const TestPage = () => {
                         />
                     );
                 })}
-                <div className="grid">
-                    {data.examples.map((image, i) => {
-                        return (
-                            <WebGLElement
-                                key={`example${i}`}
-                                type="example-image"
-                                data={image}
-                            />
-                        );
-                    })}
-                </div>
             </WebGL>
         </div>
     );

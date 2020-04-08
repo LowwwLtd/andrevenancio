@@ -1,5 +1,4 @@
-export * from './effect-context';
-export * from './example-image';
+export * from './context';
 export * from './image-block';
 export * from './materials';
 export * from './scene';

@@ -7,6 +7,7 @@ import classnames from 'classnames';
 import imageUrl from '@sanity/image-url';
 import { client } from 'app/sanity';
 import { Loader } from 'app/components/loader';
+import { VFXImage } from 'app/components/vfx/elements';
 import './style.scss';
 
 export const Thumbnail = ({ mainImage, title = '', slug = '' }) => {
@@ -21,14 +22,15 @@ export const Thumbnail = ({ mainImage, title = '', slug = '' }) => {
         .url();
 
     const [loaded, setLoaded] = useState(false);
+    const tween = { value: 0 };
+
     useEffect(() => {
         const img = new Image();
         img.onload = () => {
-            domElement.current.appendChild(img);
+            // domElement.current.appendChild(img);
 
             mask.current.style = 'clip-path: inset(0 0 0 0)';
             mask.current.style = '-webkit-clip-path: inset(0 0 0 0)';
-            const tween = { value: 0 };
             TweenLite.fromTo(
                 tween,
                 1,
@@ -51,6 +53,11 @@ export const Thumbnail = ({ mainImage, title = '', slug = '' }) => {
         };
         img.alt = title;
         img.src = src;
+
+        return () => {
+            // kill any pending tween
+            TweenLite.killTweensOf(tween);
+        };
     }, []);
 
     const classes = classnames({ thumbnail: true, loaded });
@@ -63,6 +70,7 @@ export const Thumbnail = ({ mainImage, title = '', slug = '' }) => {
             )}
             <div ref={domElement} className="image">
                 <div className="title">{title}</div>
+                <VFXImage src={src} />
             </div>
         </Link>
     );

@@ -8,6 +8,7 @@
         display: grid;
         grid-gap: 1px;
         grid-template-columns: repeat(2, 1fr);
+        overflow: hidden;
 
         .thumbnail {
             width: 50vw;

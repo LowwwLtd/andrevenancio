@@ -8,12 +8,18 @@ export class ImageBlock extends PureComponent {
         data: PropTypes.object,
     };
 
+    domElement = React.createRef();
+
     state = {
         loaded: false,
     };
 
     componentDidMount() {
-        this.ref.addEventListener('load', this.onLoad);
+        this.domElement.current.addEventListener('load', this.onLoad);
+    }
+
+    componentWillUnmount() {
+        this.domElement.current.removeEventListener('load', this.onLoad);
     }
 
     onLoad = () => {
@@ -21,9 +27,8 @@ export class ImageBlock extends PureComponent {
             loaded: true,
         });
 
-        // If this component is part of a webGL element add the image
         if (this.props.addImage) {
-            this.props.addImage(this.ref);
+            this.props.addImage(this.domElement.current);
         }
     };
 
@@ -35,8 +40,8 @@ export class ImageBlock extends PureComponent {
                 <img
                     src={url}
                     width="100%"
-                    ref={r => {
-                        this.ref = r;
+                    ref={(r) => {
+                        this.domElement.current = r;
                     }}
                     alt="i"
                 />

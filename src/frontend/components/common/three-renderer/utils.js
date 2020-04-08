@@ -1,14 +1,14 @@
 import { Object3D } from 'three';
 
-export const isString = value => {
+export const isString = (value) => {
     return Object.prototype.toString.call(value) === '[object String]';
 };
 
 export const css = (...args) => {
     let stylesList = [];
 
-    args.filter(style => !!style) // remove any falsey values from our styles array and join our style classes.
-        .forEach(style => {
+    args.filter((style) => !!style) // remove any falsey values from our styles array and join our style classes.
+        .forEach((style) => {
             if (Array.isArray(style)) {
                 stylesList = stylesList.concat(css(...style)); // Use recursion to handle nested array of styles.
             } else if (isString(style)) {
@@ -24,6 +24,7 @@ export const RandomNumber = () => {
 };
 
 export const domSize2viewSize = (el, viewSize = { width: 1, height: 1 }) => {
+    console.log('domSize2viewSize', viewSize);
     return {
         width: (el.offsetWidth / global.innerWidth) * viewSize.width,
         height: (el.offsetHeight / global.innerHeight) * viewSize.height,
@@ -35,6 +36,7 @@ export const domPosition2viewPosition = (
     viewSize = { width: 1, height: 1 },
     geoSize
 ) => {
+    // console.log('dom position 2 view position', viewSize, geoSize);
     geoSize = geoSize || domSize2viewSize(el, viewSize);
     const box = el.getBoundingClientRect();
     return {
@@ -50,7 +52,7 @@ export const domPosition2viewPosition = (
     };
 };
 
-export const hashCode = s => {
+export const hashCode = (s) => {
     let h = 0;
     const l = s.length;
     let i = 0;

@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { EffectContext } from './effect-context';
+import { Context } from './context';
 import { Scene } from './scene';
 import { WrapEffect } from './wrap-effect';
 
@@ -11,12 +11,9 @@ import { WrapEffect } from './wrap-effect';
   
 */
 export class WebGLRenderer extends PureComponent {
-    static contextType = EffectContext;
+    static contextType = Context;
 
-    constructor(props) {
-        super(props);
-        this.scene = new Scene();
-    }
+    scene = new Scene();
 
     componentDidMount() {
         // Initialize the scene
@@ -60,13 +57,11 @@ export class WebGLRenderer extends PureComponent {
 
     render() {
         return (
-            <div>
-                <canvas
-                    ref={r => {
-                        this.canvasRef = r;
-                    }}
-                />
-            </div>
+            <canvas
+                ref={(r) => {
+                    this.canvasRef = r;
+                }}
+            />
         );
     }
 }

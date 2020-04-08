@@ -91,7 +91,7 @@ export class Scene {
 
     // Add image
     // As this creates the webGL verison of the image & allows us to render
-    addImage = image => {
+    addImage = (image) => {
         createImageWebGL(image, this.viewSize, this.bufferScene);
     };
 
@@ -103,7 +103,7 @@ export class Scene {
     // In theory if you wanted to you could take specific action on types
     updateElements = () => {
         // const { elements } = this.ctx.elements;
-        this.ctx.elements.forEach(element => {
+        this.ctx.elements.forEach((element) => {
             if (element.plane.visible) {
                 const newPosition = domPosition2viewPosition(
                     element.el,
@@ -144,7 +144,7 @@ export class Scene {
     // Loop the elemtns and match their DOM counterparts
     resizeElements = () => {
         // const { elements } = this.ctx.elements;
-        this.ctx.elements.forEach(element => {
+        this.ctx.elements.forEach((element) => {
             element.geoSize = domSize2viewSize(element.el, this.viewSize);
             if (
                 element.plane.material.uniforms &&
@@ -164,10 +164,10 @@ export class Scene {
     // Render loop that updates elements & other things
     // Once updates are done we render everything
     render = () => {
-        if (this.width > 768) {
-            this.updateElements();
-            this.renderWebGl();
-        }
+        //if (this.width > 768) {
+        this.updateElements();
+        this.renderWebGl();
+        //}
     };
 
     // Render the buffer scene into our main scene

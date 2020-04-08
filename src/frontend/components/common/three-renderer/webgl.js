@@ -3,15 +3,9 @@ import PropTypes from 'prop-types';
 import { TextureLoader, LinearFilter, PlaneBufferGeometry, Mesh } from 'three';
 import { hashCode, domSize2viewSize } from './utils';
 import { paperMaterial } from './materials';
-import { EffectContext } from './effect-context';
+import { Context } from './context';
 import { WebGLRenderer } from './webgl-renderer';
-/*
-    
-    WebGL:
-    
-    This acts as the wrapper for all webGL.
-    
-*/
+
 export class WebGL extends Component {
     static propTypes = {
         children: PropTypes.node,
@@ -23,35 +17,31 @@ export class WebGL extends Component {
         scene: null,
     };
 
-    // Basics
     componentDidMount() {
         this.viewSize = {
             height: 1,
             width: 1,
         };
+        this.raf = requestAnimationFrame(this.update);
     }
 
-    // Set Scene
-    setScene = scene => {
+    componentWillUnmount() {
+        cancelAnimationFrame(this.raf);
+    }
+
+    setScene = (scene) => {
         this.setState({
             scene,
         });
-
-        // Once we have a scene start updating it.
-        this.update();
     };
 
-    // Set renderer
-    setRenderer = renderer => {
+    setRenderer = (renderer) => {
         this.setState({
             renderer,
         });
     };
 
-    // Add image
-    // This pushes our image to our context & creates a webGL version.
-    // As images load this will get called and they will be added.
-    addImage = image => {
+    addImage = (image) => {
         const _image = {
             el: image,
             id: hashCode(`${image.src}_${Math.random()}`),
@@ -61,7 +51,7 @@ export class WebGL extends Component {
         // note this is coming from cache so shouldn't be much network wise.
         const loader = new TextureLoader();
         loader.crossOrigin = '*';
-        loader.load(_image.el.src, imageBitmap => {
+        loader.load(_image.el.src, (imageBitmap) => {
             const { elements, scene } = this.state;
             const texture = imageBitmap;
             texture.minFilter = LinearFilter;
@@ -108,20 +98,16 @@ export class WebGL extends Component {
         });
     };
 
-    // Update will render the scene & any other things you want to do on rAF
-    update() {
-        requestAnimationFrame(() => {
-            this.state.scene.render();
-            this.update();
-        });
-    }
+    update = () => {
+        this.raf = requestAnimationFrame(this.update);
+        this.state.scene.render();
+    };
 
     // We wrap everything in our Effect context provider
     render() {
-        const { children } = this.props;
         const { elements, scene, renderer } = this.state;
         return (
-            <EffectContext.Provider
+            <Context.Provider
                 value={{
                     elements,
                     scene,
@@ -131,9 +117,9 @@ export class WebGL extends Component {
                     addImage: this.addImage,
                 }}
             >
-                {children}
+                {this.props.children}
                 <WebGLRenderer />
-            </EffectContext.Provider>
+            </Context.Provider>
         );
     }
 }
