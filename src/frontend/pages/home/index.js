@@ -28,15 +28,16 @@ export class HomePage extends PureComponent {
         cancelAnimationFrame(this.raf);
     }
 
-    handleMove = e => {
+    handleMove = (e) => {
         if (this.canvas.test) {
             this.canvas.test(e.clientX * this.ratio, e.clientY * this.ratio);
         }
     };
 
     resize = () => {
-        const width = global.innerWidth * this.ratio;
-        const height = global.innerHeight * this.ratio;
+        const zoom = document.documentElement.clientWidth / global.innerWidth;
+        const width = global.innerWidth * this.ratio * zoom;
+        const height = global.innerHeight * this.ratio * zoom;
 
         this.domElement.current.width = width;
         this.domElement.current.height = height;

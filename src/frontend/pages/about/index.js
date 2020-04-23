@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import React, { PureComponent } from 'react';
 import { VFXImage } from 'app/components/vfx/elements';
 import './style.scss';
@@ -73,7 +74,7 @@ export class AboutPage extends PureComponent {
                                 target="_blank"
                                 rel="noopener noreferrer"
                             >
-                                Linkedin
+                                LinkedIn
                             </a>
                             <a
                                 href="mailto:info@andrevenancio.com?subject=Hello%20from%20andrevenancio.com&body=Hi%20Andr%C3%A9%0D%0A"

@@ -14,11 +14,14 @@ each elements is checked against the screen coordinates and we only render objec
 import React, { PureComponent } from 'react';
 import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import mobile from 'is-mobile';
 import { Context } from './context';
 import { Rectangle } from './rectangle';
 import { Debug } from './debug';
 import { getPageOffset, getElementRect } from './utils';
 import { WebGL } from './webgl';
+
+const isMobile = mobile();
 
 class VFXClass extends PureComponent {
     static propTypes = {
@@ -105,9 +108,9 @@ class VFXClass extends PureComponent {
         }
     };
 
-    add = (domElement) => {
+    add = (props) => {
         const element = {
-            domElement,
+            ...props,
             rectangle: new Rectangle(),
         };
 
@@ -116,16 +119,18 @@ class VFXClass extends PureComponent {
         }));
     };
 
-    hover = (domElement, x, y) => {
+    hover = (/* domElement, x, y */) => {
         // console.log('hover', domElement, x, y);
     };
 
-    out = (domElement, x, y) => {
+    out = (/* domElement, x, y */) => {
         // console.log('out', domElement, x, y);
     };
 
-    remove = (element) => {
-        const found = this.state.elements.find((e) => e.domElement === element);
+    remove = (domElement) => {
+        const found = this.state.elements.find(
+            (e) => e.domElement === domElement
+        );
         const index = this.state.elements.indexOf(found);
         if (index !== -1) {
             this.setState((prevState) => ({
@@ -137,6 +142,7 @@ class VFXClass extends PureComponent {
     render() {
         const { add, remove, hover, out } = this;
         const { elements } = this.state;
+        console.log('render', isMobile);
         return (
             <Context.Provider
                 value={{
@@ -145,10 +151,11 @@ class VFXClass extends PureComponent {
                     hover,
                     out,
                     elements,
+                    isMobile,
                 }}
             >
                 {this.props.children}
-                <WebGL ref={this.webgl} />
+                {!isMobile && <WebGL ref={this.webgl} />}
                 <Debug
                     ref={this.debug}
                     debug={this.props.debug}
