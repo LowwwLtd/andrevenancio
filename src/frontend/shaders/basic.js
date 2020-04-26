@@ -20,11 +20,12 @@ export const basic = ({ texture }) => {
         varying vec2 vUv;
 
         void main() {
-            // zoom
             vec2 uv = vUv;
-            float zoom = 0.04;
-            uv *= 1.0 - zoom * hover;
-            uv += zoom / 2.0 * hover;
+
+            // zoom
+            // uv -= vec2(0.5);
+            // uv /= vec2(1.1) * (1.0 + hover);
+            // uv += vec2(0.5);
 
             // colour or grayscale?
             vec4 color = texture2D(texture, uv);

@@ -142,7 +142,6 @@ class VFXClass extends PureComponent {
     render() {
         const { add, remove, hover, out } = this;
         const { elements } = this.state;
-        console.log('render', isMobile);
         return (
             <Context.Provider
                 value={{

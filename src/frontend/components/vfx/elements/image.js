@@ -40,7 +40,7 @@ export class VFXImage extends PureComponent {
             texture.minFilter = LinearFilter;
 
             this.material = new ShaderMaterial(basic({ texture }));
-            this.material.uniforms.hover.value = this.props.hover ? 0 : 1;
+            // this.material.uniforms.hover.value = this.props.hover ? 0 : 1;
 
             this.setState({
                 added: true,
@@ -102,8 +102,8 @@ export class VFXImage extends PureComponent {
                         this.context &&
                         !this.context.isMobile &&
                         this.state.added
-                            ? 0
-                            : 1,
+                            ? 0 // 0
+                            : 1, // 1
                 }}
             />
         );
