@@ -74,17 +74,9 @@ export const post = ({ texture }) => {
             pos.x *= aspect;
 
             // --------------------------------------------------
-            // SCROLL EFFECT
+            // SCROLL SPEED EFFECT
             // --------------------------------------------------
-            // vec4 t = texture2D(texture, vUv);
-            // uv.y += 0.01 * scrollSpeed * 2.0 * fract(sin(dot(vec2(vUv.x), vec2(100.0, 100.0))) * 500.0);
-            // t.r = texture2D(texture, uv).r;
-
-            // uv.y += 0.01 * scrollSpeed * 2.0 * fract(sin(dot(vUv, vec2(100.0, 100.0))) * 500.0);
-            // t.g = texture2D(texture, uv).g;
-
-            // uv.y += 0.01 * scrollSpeed * 2.0 * fract(sin(dot(vec2(vUv.y), vec2(100.0, .0))) * 500.0);
-            // t.b = texture2D(texture, uv).b;
+            uv.y += 0.01 * scrollSpeed * 2.0 * fract(sin(dot(vec2(vUv.x), vec2(100.0, 100.0))) * 500.0);
 
             // --------------------------------------------------
             // BUBBLE EFFECT

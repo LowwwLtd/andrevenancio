@@ -33,6 +33,27 @@
             text-align: right;
         }
 
+        .blink {
+            position: relative;
+        }
+
+        .blink:after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: -10px;
+            width: 5px;
+            height: 100%;
+            background-color: #fff;
+            animation: blinker 0.8s linear infinite;
+        }
+
+        @keyframes blinker {
+            50% {
+                opacity: 0;
+            }
+        }
+
         p {
             font-size: 18px;
             letter-spacing: 0;

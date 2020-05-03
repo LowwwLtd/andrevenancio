@@ -17,7 +17,7 @@ export const ImageComponent = ({ src, alt }) => {
     const onComplete = () => {
         TweenLite.to(slide.current, 0.5, {
             opacity: 0,
-            ease: 'Power2.easeInOut',
+            ease: 'Power2.easeOut',
             delay: Math.random() * 0.5,
             onComplete: () => {
                 slide.current.style.pointerEvents = 'none';

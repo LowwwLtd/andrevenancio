@@ -10,7 +10,7 @@
         grid-template-columns: repeat(2, 1fr);
         overflow: hidden;
 
-        .thumbnail {
+        .image {
             width: 50vw;
             height: 50vw;
         }
@@ -18,7 +18,7 @@
         @media only screen and (min-width: 768px) {
             grid-template-columns: repeat(4, 1fr);
 
-            .thumbnail {
+            .image {
                 width: calc(100vw / 4);
                 height: calc(100vw / 4);
             }
@@ -28,7 +28,7 @@
             width: 1440px;
             margin: 0 auto;
 
-            .thumbnail {
+            .image {
                 width: calc(1440px / 4);
                 height: calc(1440px / 4);
             }

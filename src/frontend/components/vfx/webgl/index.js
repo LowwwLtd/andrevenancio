@@ -99,7 +99,7 @@ export class WebGL extends PureComponent {
 
         this.renderer = new WebGLRenderer({
             canvas: this.canvas.current,
-            antialias: true,
+            antialias: false, // true,
             alpha: true,
             premultipliedAlpha: true,
             preserveDrawingBufer: true,
@@ -206,7 +206,7 @@ export class WebGL extends PureComponent {
         this.material.uniforms.texture.value = this.bufferTexture.texture;
         this.material.uniforms.time.value = timestamp / 1000;
         this.material.uniforms.scrollSpeed.value =
-            Math.abs(this.scrollVelocity) / 10;
+            Math.abs(this.scrollVelocity) / 30;
         this.material.uniforms.scrollVelocity.value = this.scrollVelocity;
         this.material.uniforms.mouse.value.x = this.mouse.x;
         this.material.uniforms.mouse.value.y = this.mouse.y;

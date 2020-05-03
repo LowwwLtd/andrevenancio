@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
 import { withRouter, Switch, Route } from 'react-router-dom';
-import { Transition, fade } from 'app/components/transition'; // 'snap-transition';
+import { Transition, verticalSlide } from 'app/components/transition'; // 'snap-transition';
 import { routes } from 'app/routes';
 import { Header } from 'app/components/header';
 import { VFX } from 'app/components/vfx';
@@ -11,7 +11,7 @@ const Application = ({ location }) => {
         <>
             <Header />
             <VFX>
-                <Transition location={location} type={fade()}>
+                <Transition location={location} type={verticalSlide()}>
                     <Switch location={location}>
                         {routes.map((route) => (
                             <Route

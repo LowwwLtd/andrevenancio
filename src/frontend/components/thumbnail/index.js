@@ -26,7 +26,7 @@ export const Thumbnail = ({ mainImage, title = '', slug = '' }) => {
     const onComplete = () => {
         TweenLite.to(slide.current, 0.5, {
             width: 0,
-            ease: 'Power2.easeInOut',
+            ease: 'Power2.easeOut',
             delay: Math.random() * 0.5,
         });
     };

@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/accessible-emoji */
 import React, { PureComponent } from 'react';
 import { debounce } from 'app/utils/debounce';
-import { Canvas } from './backup';
+import { Canvas } from './canvas';
 import './style.scss';
 
 export class HomePage extends PureComponent {
@@ -13,6 +13,7 @@ export class HomePage extends PureComponent {
         this.ratio = global.devicePixelRatio;
 
         this.canvas = new Canvas(context);
+
         this.resize();
 
         this.debounced = debounce(this.resize, 100);

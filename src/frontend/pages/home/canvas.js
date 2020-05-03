@@ -1,29 +1,38 @@
 /* eslint-disable no-undef */
-import { loadFontFace } from 'app/utils/canvas';
-import { map } from 'app/utils/math';
-import { Text } from './text';
+import QuadTree, { Rectangle, Point } from 'app/utils/quadtree';
+import { random } from 'app/utils/math';
 
-const MIN_DISTANCE = 40;
-const SPRING = 0.2; // original: 0.04
-const FRICTION = 0.9;
-const SKIP = 1;
+const VELOCITY = 5;
+const MAX_CONNECTIONS = 100;
+
+let quadtree;
+let point;
 
 export class Canvas {
     constructor(context) {
         this.context = context;
-        this.ready = false;
 
+        this.width = global.innerWidth * global.devicePixelRatio;
+        this.height = global.innerHeight * global.devicePixelRatio;
         this.ratio = global.devicePixelRatio;
-        this.width = global.innerWidth * this.ratio;
-        this.height = global.innerHeight * this.ratio;
+        this.settings = {
+            particles: 100,
+            distance: 300,
+        };
 
-        this.text = new Text();
-        loadFontFace('SpaceGrotesk-Bold', '/fonts/SpaceGrotesk-Bold.ttf').then(
-            () => {
-                this.ready = true;
-                this.rebuild();
-            }
-        );
+        this.particles = [];
+        for (let i = 0; i < this.settings.particles; i++) {
+            const x = Math.random() * this.width;
+            const y = Math.random() * this.height;
+            const vx = random(-VELOCITY, VELOCITY);
+            const vy = random(-VELOCITY, VELOCITY);
+            this.particles.push({
+                x,
+                y,
+                vx,
+                vy,
+            });
+        }
     }
 
     resize(width, height, ratio) {
@@ -31,176 +40,91 @@ export class Canvas {
         this.width = width;
         this.height = height;
 
-        if (this.ready) {
-            this.rebuild();
-        }
-    }
-
-    test(x, y) {
-        this.mouseX = x;
-        this.mouseY = y;
-    }
-
-    rebuild() {
-        this.text.rebuild();
-        // add physics props to existing particles
-        for (let i = 0; i < this.text.letters.length; i++) {
-            for (let j = 0; j < this.text.letters[i].length; j++) {
-                // velocity
-                this.text.letters[i][j].vx = 0;
-                this.text.letters[i][j].vy = 0;
-                // current
-                this.text.letters[i][j].cx = this.text.letters[i][j].x;
-                this.text.letters[i][j].cy = this.text.letters[i][j].y;
-                // target
-                this.text.letters[i][j].tx = this.text.letters[i][j].x;
-                this.text.letters[i][j].ty = this.text.letters[i][j].y;
-            }
-        }
-    }
-
-    calculate() {
-        for (let letter = 0; letter < this.text.letters.length; letter++) {
-            for (let i = 0; i < this.text.letters[letter].length; i++) {
-                if (this.text.letters[letter][i].vx === undefined) {
-                    // velocity
-                    this.text.letters[letter][i].vx = 0;
-                    this.text.letters[letter][i].vy = 0;
-                    // current
-                    this.text.letters[letter][i].cx = this.text.letters[letter][
-                        i
-                    ].x;
-                    this.text.letters[letter][i].cy = this.text.letters[letter][
-                        i
-                    ].y;
-                    // target
-                    this.text.letters[letter][i].tx = this.text.letters[letter][
-                        i
-                    ].x;
-                    this.text.letters[letter][i].ty = this.text.letters[letter][
-                        i
-                    ].y;
-                }
-
-                this.text.letters[letter][i].vx +=
-                    (this.text.letters[letter][i].tx -
-                        this.text.letters[letter][i].cx) *
-                    SPRING;
-                this.text.letters[letter][i].vy +=
-                    (this.text.letters[letter][i].ty -
-                        this.text.letters[letter][i].cy) *
-                    SPRING;
-
-                // calc dist
-                if (i % SKIP === 0) {
-                    const dx = this.mouseX - this.text.letters[letter][i].cx;
-                    const dy = this.mouseY - this.text.letters[letter][i].cy;
-                    const dist = Math.sqrt(dx * dx + dy * dy);
-                    if (dist < MIN_DISTANCE * 2) {
-                        this.text.letters[letter][i].tx = map(
-                            dist,
-                            0,
-                            MIN_DISTANCE,
-                            this.text.letters[letter][i].x,
-                            this.mouseX
-                        );
-                        this.text.letters[letter][i].ty = map(
-                            dist,
-                            0,
-                            MIN_DISTANCE,
-                            this.text.letters[letter][i].y,
-                            this.mouseY
-                        );
-
-                        this.text.letters[letter][i].vx +=
-                            (this.text.letters[letter][i].tx -
-                                this.text.letters[letter][i].cx) *
-                            0.2;
-                        this.text.letters[letter][i].vy +=
-                            (this.text.letters[letter][i].ty -
-                                this.text.letters[letter][i].cy) *
-                            0.2;
-                    }
-                }
-                this.text.letters[letter][i].tx = this.text.letters[letter][
-                    i
-                ].x;
-                this.text.letters[letter][i].ty = this.text.letters[letter][
-                    i
-                ].y;
-
-                this.text.letters[letter][i].vx *= FRICTION;
-                this.text.letters[letter][i].vy *= FRICTION;
-                this.text.letters[letter][i].cx += this.text.letters[letter][
-                    i
-                ].vx;
-                this.text.letters[letter][i].cy += this.text.letters[letter][
-                    i
-                ].vy;
-            }
-        }
-    }
-
-    draw() {
-        this.context.beginPath();
-        this.context.fillStyle = 'white';
-        for (let letter = 0; letter < this.text.letters.length; letter++) {
-            // draw each letter through looping the points (p)
-            for (let p = 0; p < this.text.letters[letter].length; p++) {
-                // console.log('letter', letter);
-
-                this.context.moveTo(
-                    this.text.letters[letter][0].cx,
-                    this.text.letters[letter][0].cy
-                );
-                // next point (np)
-                for (let np = 1; np < this.text.letters[letter].length; np++) {
-                    this.context.lineTo(
-                        this.text.letters[letter][np].cx,
-                        this.text.letters[letter][np].cy
-                    );
-                }
-                this.context.lineTo(
-                    this.text.letters[letter][0].cx,
-                    this.text.letters[letter][0].cy
-                );
-            }
-
-            // debug points (dp)
-            // for (let dp = 0; dp < this.text.letters[letter].length; dp++) {
-            //     this.context.beginPath();
-            //     this.context.fillStyle = 'red';
-            //     this.context.arc(
-            //         this.text.letters[letter][dp].cx,
-            //         this.text.letters[letter][dp].cy,
-            //         2,
-            //         0,
-            //         2 * Math.PI,
-            //         false
-            //     );
-            //     this.context.fill();
-            // }
-        }
-        this.context.fill();
+        const max = Math.max(this.width, this.height);
+        this.boundary = new Rectangle(0, 0, max, max);
     }
 
     update() {
         this.context.clearRect(0, 0, this.width, this.height);
 
-        // mouse
-        this.context.beginPath();
-        this.context.fillStyle = 'rgba(0,255,255,0.5)';
-        this.context.arc(
-            this.mouseX,
-            this.mouseY,
-            MIN_DISTANCE,
-            0,
-            2 * Math.PI,
-            false
-        );
-        this.context.fill();
+        // move particles
+        for (let i = 0; i < this.particles.length; i++) {
+            const current = this.particles[i];
+            if (current.x > this.width) {
+                current.vx = -VELOCITY;
+            } else if (current.x < 0) {
+                current.vx = VELOCITY;
+            } else {
+                current.vx *= 1;
+            }
 
-        this.calculate();
-        this.draw();
+            if (current.y >= this.height) {
+                current.vy = -VELOCITY;
+            } else if (current.y <= 0) {
+                current.vy = VELOCITY;
+            } else {
+                current.vy *= 1;
+            }
+
+            current.x += current.vx;
+            current.y += current.vy;
+
+            this.context.beginPath();
+            this.context.fillStyle = '#fff';
+            this.context.arc(current.x, current.y, 2, 0, 2 * Math.PI);
+            this.context.fill();
+            this.context.closePath();
+        }
+
+        // add points to quad
+        quadtree = new QuadTree(this.boundary, 2);
+        for (let i = 0; i < this.particles.length; i++) {
+            point = new Point(this.particles[i].x, this.particles[i].y);
+            quadtree.insert(point);
+        }
+
+        // draw rectangles
+        quadtree.borders(this.context);
+
+        for (let i = 0; i < this.particles.length - 1; i++) {
+            const width = this.settings.distance;
+            const height = this.settings.distance;
+            const x = this.particles[i].x - width / 2;
+            const y = this.particles[i].y - height / 2;
+
+            const bounds = new Rectangle(x, y, width, height);
+            const selected = quadtree.query(bounds);
+
+            for (let j = 0; j < selected.length; j++) {
+                if (i < MAX_CONNECTIONS) {
+                    this.connectDots(this.particles[i], selected[j]);
+                }
+            }
+        }
+    }
+
+    connectDots(partA, partB) {
+        const dx = partB.x - partA.x;
+        const dy = partB.y - partA.y;
+
+        const dist = Math.sqrt(dx * dx + dy * dy);
+
+        if (dist < this.settings.distance) {
+            this.context.beginPath();
+            this.context.strokeStyle = '#999';
+            this.context.lineWidth = dist / this.settings.distance;
+            this.context.moveTo(partA.x, partA.y);
+            this.context.lineTo(partB.x, partB.y);
+            this.context.stroke();
+            this.context.closePath();
+
+            const ax = dx * 0.0001;
+            const ay = dy * 0.0001;
+
+            partA.vx += ax;
+            partA.vy += ay;
+            partB.vx -= ax;
+            partB.vy -= ay;
+        }
     }
 }

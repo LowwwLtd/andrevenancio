@@ -12,7 +12,7 @@ export const Gallery = ({ images = [] }) => {
             {images.map((image) => (
                 <ImageComponent
                     key={image._key}
-                    src={imageUrl(client).image(image).url()}
+                    src={imageUrl(client).image(image).width(1440).url()}
                     alt={image.alt || 'gallery'}
                 />
             ))}

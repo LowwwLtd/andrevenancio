@@ -10,13 +10,13 @@
         flex-direction: column;
 
         .img {
-            width: 100%;
-
-            img {
-                width: 100%;
-                height: auto;
+            // override defaults
+            .image {
+                width: 100vw;
+                height: calc(100vw * 853 / 1280);
             }
         }
+
         section {
             width: calc(100% - 64px);
             margin: 32px;
@@ -26,7 +26,10 @@
             flex-direction: initial;
 
             .img {
-                width: 50%;
+                .image {
+                    width: 50vw;
+                    height: calc(50vw * 853 / 1280);
+                }
             }
 
             section {
