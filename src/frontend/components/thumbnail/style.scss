@@ -2,15 +2,12 @@
     position: relative;
     width: 100%;
     height: 100%;
-
     color: white;
     overflow: hidden;
 
     .image {
         img {
-            opacity: 0.8;
             width: 100%;
-            filter: grayscale(100%);
         }
 
         .title {
@@ -18,19 +15,17 @@
             top: 16px;
             left: 16px;
             z-index: 1;
+            pointer-events: none;
         }
-    }
 
-    @media (hover: none) {
-        .image {
-            img {
-                opacity: 1;
-                filter: grayscale(0%);
-            }
-
-            .title {
-                opacity: 1;
-            }
+        .over {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #202022;
+            z-index: 2;
         }
     }
 }

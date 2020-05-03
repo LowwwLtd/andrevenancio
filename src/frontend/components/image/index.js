@@ -1,33 +1,27 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable no-undef */
 import React, { useRef, useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
 import { TextureLoader, LinearFilter } from 'three';
 import { TweenLite } from 'gsap';
-import imageUrl from '@sanity/image-url';
-import { client } from 'app/sanity';
 import { VFXImage } from 'app/components/vfx/elements';
 import { MOBILE } from 'app/constants';
 import './style.scss';
 
-export const Thumbnail = ({ mainImage, title = '', slug = '' }) => {
+export const ImageComponent = ({ src, alt }) => {
     const domElement = useRef();
     const slide = useRef();
 
+    const path = src;
     const [texture, setTexture] = useState();
-    const path = imageUrl(client)
-        .image(mainImage)
-        .crop('center')
-        .fit('crop')
-        .width(512)
-        .height(512)
-        .url();
 
     const onComplete = () => {
         TweenLite.to(slide.current, 0.5, {
-            width: 0,
+            opacity: 0,
             ease: 'Power2.easeInOut',
             delay: Math.random() * 0.5,
+            onComplete: () => {
+                slide.current.style.pointerEvents = 'none';
+            },
         });
     };
 
@@ -39,7 +33,7 @@ export const Thumbnail = ({ mainImage, title = '', slug = '' }) => {
                 domElement.current.appendChild(img);
                 onComplete();
             };
-            img.alt = title;
+            img.alt = alt;
             img.src = path;
         } else {
             const loader = new TextureLoader();
@@ -54,12 +48,11 @@ export const Thumbnail = ({ mainImage, title = '', slug = '' }) => {
     }, []);
 
     return (
-        <Link to={`/work/${slug.current}`} className="thumbnail">
-            <div ref={domElement} className="image">
-                <div className="title noselect">{title}</div>
-                {!MOBILE && texture && <VFXImage texture={texture} hover />}
-                <div ref={slide} className="over" />
-            </div>
-        </Link>
+        <div ref={domElement} className="image">
+            {!MOBILE && texture && (
+                <VFXImage texture={texture} alt={alt} hover />
+            )}
+            <div ref={slide} className="over" />
+        </div>
     );
 };

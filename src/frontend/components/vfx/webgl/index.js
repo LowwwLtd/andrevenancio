@@ -11,10 +11,12 @@ import {
     LinearFilter,
     NearestFilter,
     ShaderMaterial,
+    Clock,
 } from 'three';
-// import { TweenLite } from 'gsap';
+import { TweenLite } from 'gsap';
 import { post } from 'app/shaders/post-processing';
 import { Context } from '../context';
+import { getPageOffset } from '../utils';
 
 const ratio = global.devicePixelRatio;
 
@@ -42,12 +44,20 @@ export class WebGL extends PureComponent {
     constructor(props) {
         super(props);
 
-        this.update.bind(this);
+        // scroll offset
         this.offset = new Vector2();
 
-        this.velocity = 0;
-        this.curVelocity = 0;
+        // scroll speed
+        this.scrollVelocity = 0;
         this.oldScrollTop = 0;
+        this.scrollSpeed = 0;
+
+        // mouse speed
+        this.mouse = new Vector2();
+        this.prevMouse = new Vector2();
+        this.mouseTarget = new Vector2();
+        this.mouseSpeed = 0;
+        this.mouseTargetSpeed = 0;
     }
 
     componentDidMount() {
@@ -55,20 +65,31 @@ export class WebGL extends PureComponent {
         this.resize();
         this.update();
 
+        // used to detect if we need to update our child tree
         this.prevContext = this.context;
 
-        this.updateChildrenTree(this.context.elements);
+        this.rebuildChildrenTree(this.context.elements);
     }
 
     componentDidUpdate() {
+        document.body.addEventListener(
+            'mousemove',
+            this.handleMouseMove.bind(this),
+            false
+        );
         const same = compare(this.prevContext.elements, this.context.elements);
         this.prevContext = this.context;
         if (!same) {
-            this.updateChildrenTree(this.context.elements);
+            this.rebuildChildrenTree(this.context.elements);
         }
     }
 
     componentWillUnmount() {
+        document.body.removeEventListener(
+            'mousemove',
+            this.handleMouseMove.bind(this),
+            false
+        );
         cancelAnimationFrame(this.raf);
     }
 
@@ -80,8 +101,8 @@ export class WebGL extends PureComponent {
             canvas: this.canvas.current,
             antialias: true,
             alpha: true,
-            // premultipliedAlpha: true,
-            // preserveDrawingBufer: true,
+            premultipliedAlpha: true,
+            preserveDrawingBufer: true,
         });
 
         this.postprocessingScene = new Scene();
@@ -90,6 +111,8 @@ export class WebGL extends PureComponent {
 
         this.camera = new OrthographicCamera(-w, w, h, -h, 1, 10);
         this.camera.position.z = 1;
+
+        this.clock = new Clock();
 
         // ----------------
         // post processing
@@ -101,32 +124,51 @@ export class WebGL extends PureComponent {
         );
 
         const geometry = new PlaneGeometry(1, 1);
-        this.postProcessingMaterial = new ShaderMaterial(
+        this.material = new ShaderMaterial(
             post({ texture: this.bufferTexture })
         );
 
-        this.plane = new Mesh(geometry, this.postProcessingMaterial);
+        this.plane = new Mesh(geometry, this.material);
         this.plane.scale.set(global.innerWidth, global.innerHeight, 1);
         this.plane.material.needsUpdate = true;
         this.postprocessingScene.add(this.plane);
     }
 
-    update = () => {
-        // start
-        this.scrollingContainer =
-            this.scrollingContainer ||
-            document.scrollingElement ||
-            document.documentElement;
-        this.curVelocity =
-            (global.scrollY || this.scrollingContainer.scrollTop) -
-            this.oldScrollTop;
-        this.oldScrollTop =
-            global.scrollY || document.documentElement.scrollTop;
+    handleMouseMove(e) {
+        this.mouseTarget.x = (e.clientX * ratio) / this.width;
+        this.mouseTarget.y = 1 - (e.clientY * ratio) / this.height;
+    }
 
-        this.velocity += (this.curVelocity - this.velocity) / 4.0;
+    updateScroll() {
+        // update scroll speed
+        this.scrollVelocity = getPageOffset().y - this.oldScrollOffset;
+        this.oldScrollOffset = getPageOffset().y;
+        this.scrollSpeed += (this.scrollVelocity - this.scrollSpeed) / 4.0;
+    }
 
-        // end
-        this.raf = requestAnimationFrame(this.update);
+    updateMouse() {
+        // calculate mouse position with ease
+        this.mouse.x += (this.mouseTarget.x - this.mouse.x) / 6.0;
+        this.mouse.y += (this.mouseTarget.y - this.mouse.y) / 6.0;
+
+        // calculate mouse speed
+        this.mouseTargetSpeed = Math.sqrt(
+            (this.prevMouse.x - this.mouseTarget.x) ** 2 +
+                (this.prevMouse.y - this.mouseTarget.y) ** 2
+        );
+
+        this.mouseSpeed += (this.mouseTargetSpeed - this.mouseSpeed) / 20.0;
+
+        this.prevMouse.x = this.mouseTarget.x;
+        this.prevMouse.y = this.mouseTarget.y;
+    }
+
+    update(timestamp) {
+        this.raf = requestAnimationFrame(this.update.bind(this));
+
+        // update scroll and mouse calculations
+        this.updateScroll();
+        this.updateMouse();
 
         // add offset to position
         for (let i = 0; i < this.scene.children.length; i++) {
@@ -143,42 +185,35 @@ export class WebGL extends PureComponent {
             y -= this.height / 2;
             y *= -1;
 
-            // TODO:
-            // this.mouse.x = (event.clientX / this.viewport.width) * 2 - 1
-            // this.mouse.y = -(event.clientY / this.viewport.height) * 2 + 1
-
             this.scene.children[i].position.set(x, y, 0);
+            this.scene.children[
+                i
+            ].material.uniforms.iTime.value = this.clock.getElapsedTime();
         }
-        // enable is you dont want postprocessing
-        // this.renderer.render(this.scene, this.camera);
 
-        this.postprocessing();
-    };
+        this.postprocessing(timestamp);
+    }
 
-    postprocessing = () => {
-        // ease the effect velocity
-
-        // this.postProcessingMaterial.uniforms.effectVelocity.value = 10;
-        this.postProcessingMaterial.uniforms.effectVelocity.value =
-            Math.abs(this.velocity) / 10;
-
+    postprocessing(timestamp) {
+        // render to texture
         this.renderer.setRenderTarget(this.bufferTexture);
         this.renderer.render(this.scene, this.camera);
-        this.postProcessingMaterial.uniforms.sceneTexture.value = this.bufferTexture.texture;
         this.renderer.setRenderTarget(null);
+
+        // uniforms
+        this.material.uniforms.resolution.value.x = this.width;
+        this.material.uniforms.resolution.value.y = this.height;
+        this.material.uniforms.texture.value = this.bufferTexture.texture;
+        this.material.uniforms.time.value = timestamp / 1000;
+        this.material.uniforms.scrollSpeed.value =
+            Math.abs(this.scrollVelocity) / 10;
+        this.material.uniforms.scrollVelocity.value = this.scrollVelocity;
+        this.material.uniforms.mouse.value.x = this.mouse.x;
+        this.material.uniforms.mouse.value.y = this.mouse.y;
+        this.material.uniforms.mouseSpeed.value = this.mouseSpeed;
 
         // render final scene
         this.renderer.render(this.postprocessingScene, this.camera);
-    };
-
-    updateChildrenTree(elements) {
-        while (this.scene.children.length) {
-            this.scene.remove(this.scene.children[0]);
-        }
-
-        for (let i = 0; i < elements.length; i++) {
-            this.addQuad(elements[i]);
-        }
     }
 
     addQuad(element) {
@@ -192,13 +227,39 @@ export class WebGL extends PureComponent {
         this.scene.add(quad);
     }
 
+    rebuildChildrenTree(elements) {
+        while (this.scene.children.length) {
+            this.scene.remove(this.scene.children[0]);
+        }
+
+        for (let i = 0; i < elements.length; i++) {
+            this.addQuad(elements[i]);
+        }
+    }
+
+    /* --------------------------------------------
+    CALLED FROM PARENT
+    */
     scroll(x, y) {
         this.offset.x = x;
         this.offset.y = y;
     }
 
+    hover() {
+        TweenLite.to(this.material.uniforms.hover, 0.5, {
+            value: 1,
+            ease: 'Power2.easeInOut',
+        });
+    }
+
+    out() {
+        TweenLite.to(this.material.uniforms.hover, 0.5, {
+            value: 0,
+            ease: 'Power2.easeInOut',
+        });
+    }
+
     resize() {
-        // const zoom = document.documentElement.clientWidth / global.innerWidth;
         this.width = global.innerWidth * ratio;
         this.height = global.innerHeight * ratio;
 
@@ -224,11 +285,7 @@ export class WebGL extends PureComponent {
             );
         }
 
-        // update postprocessing
-        // Buffer texture
         this.bufferTexture.setSize(this.width, this.height);
-
-        // Plane
         this.plane.scale.set(this.width, this.height, 1);
     }
 

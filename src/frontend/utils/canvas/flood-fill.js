@@ -1,7 +1,7 @@
 // if the image has non transparent elements
 // flood it to rgba(255,255,255,255);
 // otherwise keep transparent rgba(0,0,0,0);
-export const saturate = context => {
+export const saturate = (context) => {
     const imagedata = context.getImageData(
         0,
         0,
@@ -34,12 +34,11 @@ export const getPixel = (pixeldata, x, y) => {
     return pixeldata.data[y * pixeldata.width + x];
 };
 
-export const getFirstWhitePixelTopDown = context => {
+export const getFirstWhitePixelTopDown = (context) => {
     for (let y = 0; y < context.canvas.height; y++) {
         const rowData = context.getImageData(0, y, context.canvas.width, 1)
             .data;
         for (let i = 0; i < rowData.length; i += 4) {
-            // console.log(rowData[i + 3]);
             if (rowData[i + 3] === 255) {
                 return { x: i / 4, y };
             }
@@ -115,7 +114,7 @@ now we end up with a couple of "blobs" which are groups of different colour crea
 We go through all the "blobs" and if we find. Each blob is a distinc bitmapdata with only the blob area painted
 */
 
-export const flood = context => {
+export const flood = (context) => {
     // copy context to offline context, so we dont manipulate the origin
     const temp = document.createElement('canvas');
     temp.width = context.canvas.width;
@@ -183,5 +182,5 @@ export const flood = context => {
     delete dictionary[`uid-0000`];
 
     // return all blobs
-    return Object.keys(dictionary).map(id => dictionary[id]);
+    return Object.keys(dictionary).map((id) => dictionary[id]);
 };

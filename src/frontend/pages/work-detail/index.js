@@ -5,9 +5,8 @@ import { withRouter } from 'react-router-dom';
 import imageUrl from '@sanity/image-url';
 import BlockContent from '@sanity/block-content-to-react';
 import { client, useSanityFetch, GET_POST } from 'app/sanity';
-import { Vimeo } from 'app/components/vimeo';
 import { Gallery } from 'app/components/gallery';
-import { VFXImage } from 'app/components/vfx/elements';
+import { ImageComponent } from 'app/components/image';
 import './style.scss';
 
 const serializers = {
@@ -22,13 +21,18 @@ const workDetailClass = ({ match }) => {
         global.scrollTo(0, 0);
     }, []);
 
+    if (!result) {
+        return null;
+    }
+
     const { title, info, body, technology, mainImage, gallery, vimeo } =
         result || {};
+
     return (
         <article className="work-detail">
             <div className="work-detail__content">
                 <div className="hero">
-                    <VFXImage
+                    <ImageComponent
                         src={imageUrl(client).image(mainImage).url()}
                         alt={title}
                     />
@@ -65,6 +69,16 @@ const workDetailClass = ({ match }) => {
                                         Launch Project
                                     </a>
                                 )}
+                                {vimeo && (
+                                    <a
+                                        href={vimeo}
+                                        target="_blank"
+                                        className="url vimeo"
+                                        rel="noopener noreferrer"
+                                    >
+                                        Vimeo
+                                    </a>
+                                )}
                             </div>
                         </div>
                     )}
@@ -87,7 +101,6 @@ const workDetailClass = ({ match }) => {
                     )}
                 </section>
                 {gallery && <Gallery images={gallery.images} />}
-                {vimeo && <Vimeo url={vimeo} />}
             </div>
         </article>
     );

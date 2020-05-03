@@ -6,12 +6,14 @@
 
     &__content {
         .hero {
+            width: 100%;
             height: calc(100vw * 9 / 16);
 
             img {
                 width: 100%;
             }
         }
+
         section {
             margin-top: 32px;
             margin-bottom: 32px;
@@ -37,11 +39,21 @@
                     padding: 10px 40px;
                     font-family: 'SpaceGrotesk-Bold';
                     text-decoration: none;
+                    margin-right: 8px;
                     transition: all 0.3s ease-in-out;
 
                     &:hover {
                         background-color: #202020;
                         color: white;
+                    }
+
+                    &.vimeo {
+                        background-color: #202020;
+                        color: white;
+
+                        &:hover {
+                            background-color: #00adef;
+                        }
                     }
                 }
 

@@ -14,14 +14,12 @@ each elements is checked against the screen coordinates and we only render objec
 import React, { PureComponent } from 'react';
 import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import mobile from 'is-mobile';
+import { MOBILE } from 'app/constants';
 import { Context } from './context';
 import { Rectangle } from './rectangle';
 import { Debug } from './debug';
 import { getPageOffset, getElementRect } from './utils';
 import { WebGL } from './webgl';
-
-const isMobile = mobile();
 
 class VFXClass extends PureComponent {
     static propTypes = {
@@ -64,7 +62,7 @@ class VFXClass extends PureComponent {
         this.view.y = y;
 
         // check which elements are in view
-        const keysInView = this.state.elements.filter((element) => {
+        this.state.elements.filter((element) => {
             const inView = element.rectangle.intersects(this.view);
             element.inView = inView;
             return inView;
@@ -92,10 +90,10 @@ class VFXClass extends PureComponent {
 
         this.state.elements.forEach((element) => {
             const rect = getElementRect(element.domElement);
-            element.rectangle.x = rect.x;
-            element.rectangle.y = rect.y;
-            element.rectangle.width = rect.width;
-            element.rectangle.height = rect.height;
+            element.rectangle.x = Math.round(rect.x);
+            element.rectangle.y = Math.round(rect.y);
+            element.rectangle.width = Math.round(rect.width);
+            element.rectangle.height = Math.round(rect.height);
         });
 
         if (this.debug.current) {
@@ -119,12 +117,12 @@ class VFXClass extends PureComponent {
         }));
     };
 
-    hover = (/* domElement, x, y */) => {
-        // console.log('hover', domElement, x, y);
+    hover = (domElement, x, y) => {
+        this.webgl.current.hover(x, y);
     };
 
-    out = (/* domElement, x, y */) => {
-        // console.log('out', domElement, x, y);
+    out = (domElement, x, y) => {
+        this.webgl.current.out(x, y);
     };
 
     remove = (domElement) => {
@@ -150,11 +148,10 @@ class VFXClass extends PureComponent {
                     hover,
                     out,
                     elements,
-                    isMobile,
                 }}
             >
                 {this.props.children}
-                {!isMobile && <WebGL ref={this.webgl} />}
+                {!MOBILE && <WebGL ref={this.webgl} />}
                 <Debug
                     ref={this.debug}
                     debug={this.props.debug}

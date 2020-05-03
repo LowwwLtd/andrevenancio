@@ -1,6 +1,6 @@
 /* eslint-disable max-len */
 import React, { PureComponent } from 'react';
-import { VFXImage } from 'app/components/vfx/elements';
+import { ImageComponent } from 'app/components/image';
 import './style.scss';
 
 export class AboutPage extends PureComponent {
@@ -9,7 +9,10 @@ export class AboutPage extends PureComponent {
             <div className="about">
                 <div className="about__content">
                     <div className="img">
-                        <VFXImage src="/img/about.jpg" alt="André Venâncio" />
+                        <ImageComponent
+                            src="/img/about.jpg"
+                            alt="André Venâncio"
+                        />
                     </div>
                     <section>
                         <h2>Bio</h2>
