@@ -59,7 +59,7 @@ export const post = ({ texture }) => {
         }
 
         float grain (vec2 st, float t) {
-            return fract(sin(dot(st.xy, vec2(17.0,180.)))* 2500. + t);
+            return fract(sin(dot(st.xy, vec2(17.0,180.))) * 2500. + t);
         }
 
         void main() {

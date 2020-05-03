@@ -99,7 +99,7 @@ export class WebGL extends PureComponent {
 
         this.renderer = new WebGLRenderer({
             canvas: this.canvas.current,
-            antialias: false, // true,
+            antialias: false,
             alpha: true,
             premultipliedAlpha: true,
             preserveDrawingBufer: true,
