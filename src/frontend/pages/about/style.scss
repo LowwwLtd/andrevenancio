@@ -41,6 +41,13 @@
         @media only screen and (min-width: 1440px) {
             width: 1440px;
             margin: 0 auto;
+
+            .img {
+                .image {
+                    width: 720px;
+                    height: calc(720px * 853 / 1280);
+                }
+            }
         }
     }
 }
