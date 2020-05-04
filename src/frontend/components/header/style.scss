@@ -34,7 +34,6 @@
         color: #fff;
         background-color: initial;
         margin-left: initial;
-        margin-bottom: 10px;
     }
 
     nav {
@@ -66,12 +65,6 @@
             margin-bottom: initial;
             align-items: center;
             flex-direction: initial;
-        }
-
-        a {
-            &.logo {
-                margin-bottom: 0;
-            }
         }
     }
 }
