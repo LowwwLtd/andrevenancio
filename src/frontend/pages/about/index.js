@@ -29,8 +29,8 @@ export class AboutPage extends PureComponent {
                                 >
                                     👋🏻
                                 </span>{' '}
-                                my name is André Venâncio, and I’m a Senior
-                                Creative Developer and judge at the{' '}
+                                my name is André Venâncio, and I’m a Creative
+                                Developer and judge at the{' '}
                                 <a
                                     href="https://thefwa.com"
                                     target="_blank"
@@ -127,6 +127,13 @@ export class AboutPage extends PureComponent {
                                     rel="noopener noreferrer"
                                 >
                                     Twitter
+                                </a>
+                                <a
+                                    href="https://instagram.com/_andrevenancio"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                >
+                                    Instagram
                                 </a>
                             </nav>
                         </VFXDom>
