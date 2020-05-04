@@ -128,13 +128,6 @@ export class AboutPage extends PureComponent {
                                 >
                                     Twitter
                                 </a>
-                                <a
-                                    href="https://instagram.com/_andrevenancio"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                >
-                                    Instagram
-                                </a>
                             </nav>
                         </VFXDom>
                     </section>
