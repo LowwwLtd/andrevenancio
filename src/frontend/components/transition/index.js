@@ -109,7 +109,7 @@ export class Transition extends Component {
                         width: '100vw',
                         top: 0,
                         left: 0,
-                        backgroundColor: '#151517',
+                        backgroundColor: '#111111',
                         pointerEvents: 'none',
                         zIndex: 1000,
                     }}
