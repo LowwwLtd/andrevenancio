@@ -22,6 +22,7 @@ img {
 
 section {
     margin: 0 32px;
+
     & > *:first-child {
         margin-top: initial;
     }
