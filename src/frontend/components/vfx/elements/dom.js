@@ -63,7 +63,10 @@ export class VFXDom extends PureComponent {
         const classes = classnames({
             dom: true,
             [this.state.transition]: true,
+            [this.props.children.props.className]:
+                this.props.children.props.className !== undefined,
         });
+
         return React.cloneElement(this.props.children, {
             className: classes,
             ref: this.domElement,
