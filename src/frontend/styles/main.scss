@@ -7,6 +7,7 @@ body {
     font-family: 'SpaceGrotesk-Regular', sans-serif;
     background-color: #151517;
     color: white;
+    overflow-x: hidden;
 }
 
 * {
@@ -23,7 +24,6 @@ img {
 section {
     max-width: 1440px;
     margin: 0 32px;
-    // border: 1px dashed white;
 
     & > *:first-child {
         margin-top: initial;

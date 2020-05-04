@@ -57,6 +57,10 @@
             a {
                 margin-left: initial;
                 margin-right: 16px;
+
+                &:last-child {
+                    margin-right: initial;
+                }
             }
         }
 
