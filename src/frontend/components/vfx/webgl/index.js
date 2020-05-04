@@ -217,14 +217,16 @@ export class WebGL extends PureComponent {
     }
 
     addQuad(element) {
-        const geometry = new PlaneGeometry(1, 1);
-        const material = new MeshNormalMaterial();
+        if (element.type === 'image') {
+            const geometry = new PlaneGeometry(1, 1);
+            const material = new MeshNormalMaterial();
 
-        const quad = new Mesh(geometry, element.material || material);
-        quad.userData.element = element;
-        quad.userData.uid = element.uid;
+            const quad = new Mesh(geometry, element.material || material);
+            quad.userData.element = element;
+            quad.userData.uid = element.uid;
 
-        this.scene.add(quad);
+            this.scene.add(quad);
+        }
     }
 
     rebuildChildrenTree(elements) {

@@ -3,6 +3,7 @@
 import React from 'react';
 import { GET_ALL_POSTS, useSanityFetch } from 'app/sanity';
 import { Thumbnail } from 'app/components/thumbnail';
+import { VFXDom } from 'app/components/vfx/elements';
 import './style.scss';
 
 export const WorkPage = () => {
@@ -10,14 +11,18 @@ export const WorkPage = () => {
     return (
         <div className="work">
             <section className="hello">
-                <h1>Hello</h1>
-                <p>
-                    I&apos;m André{' '}
-                    <span role="img" aria-label="wave" className="wave">
-                        👋🏻
-                    </span>
-                    , a Creative Developer based in London.
-                </p>
+                <VFXDom>
+                    <h1>Hello</h1>
+                </VFXDom>
+                <VFXDom>
+                    <p>
+                        I&apos;m André{' '}
+                        <span role="img" aria-label="wave" className="wave">
+                            👋🏻
+                        </span>
+                        , a Creative Developer based in London.
+                    </p>
+                </VFXDom>
             </section>
             <div className="work__content">
                 {result &&

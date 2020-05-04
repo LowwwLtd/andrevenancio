@@ -31,6 +31,7 @@ export class VFXImage extends PureComponent {
 
         if (this.context) {
             this.context.add({
+                type: 'image',
                 uid: this.material.uuid,
                 domElement: this.domElement.current,
                 material: this.material,

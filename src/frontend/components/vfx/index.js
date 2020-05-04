@@ -62,18 +62,21 @@ class VFXClass extends PureComponent {
         this.view.y = y;
 
         // check which elements are in view
-        this.state.elements.filter((element) => {
+        const elementsInView = this.state.elements.filter((element) => {
             const inView = element.rectangle.intersects(this.view);
             element.inView = inView;
             return inView;
         });
 
         // update transition elements in view
-        // keysInView.forEach((key) => {
-        //     tree[key].transition.scroll(
-        //         tree[key].rectangle.y - offset,
-        //     );
-        // });
+        elementsInView.forEach((element) => {
+            if (element.type === 'dom') {
+                element.react.scroll(
+                    element.rectangle.y - y,
+                    element.rectangle
+                );
+            }
+        });
 
         if (this.debug.current) {
             this.debug.current.draw();

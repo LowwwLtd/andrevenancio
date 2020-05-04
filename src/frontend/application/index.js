@@ -5,12 +5,13 @@ import { Transition, verticalSlide } from 'app/components/transition'; // 'snap-
 import { routes } from 'app/routes';
 import { Header } from 'app/components/header';
 import { VFX } from 'app/components/vfx';
+import { getParam } from 'app/utils/params';
 
 const Application = ({ location }) => {
     return (
         <>
             <Header />
-            <VFX>
+            <VFX debug={getParam('debug') === 'true'}>
                 <Transition location={location} type={verticalSlide()}>
                     <Switch location={location}>
                         {routes.map((route) => (
