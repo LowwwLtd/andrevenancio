@@ -210,7 +210,7 @@ export class WebGL extends PureComponent {
         this.material.uniforms.scrollVelocity.value = this.scrollVelocity;
         this.material.uniforms.mouse.value.x = this.mouse.x;
         this.material.uniforms.mouse.value.y = this.mouse.y;
-        this.material.uniforms.mouseSpeed.value = this.mouseSpeed; // 0.02;
+        this.material.uniforms.mouseSpeed.value = 0.03; // this.mouseSpeed; // 0.02;
 
         // render final scene
         this.renderer.render(this.postprocessingScene, this.camera);
