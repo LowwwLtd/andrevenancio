@@ -1,19 +1,17 @@
 import React, { PureComponent } from 'react';
-import { Link, NavLink } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import './style.scss';
 
 export class Header extends PureComponent {
     render() {
         return (
             <header className="header">
-                <Link to="/" className="logo noselect">
-                    André Venâncio
-                </Link>
+                <div className="logo noselect">André Venâncio</div>
                 <nav>
-                    <NavLink to="/work" className="noselect">
+                    <NavLink to="/work" exact className="noselect">
                         WORK
                     </NavLink>
-                    <NavLink to="/about" className="noselect">
+                    <NavLink to="/about" exact className="noselect">
                         ABOUT
                     </NavLink>
                 </nav>

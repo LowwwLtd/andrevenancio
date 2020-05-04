@@ -1,6 +1,6 @@
 {
     "name": "andrevenancio",
-    "version": "1.1.0",
+    "version": "1.1.1",
     "description": "personal portfolio",
     "main": "server.js",
     "scripts": {

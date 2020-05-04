@@ -1,5 +1,6 @@
 import React from 'react';
-import { HomePage } from 'app/pages/home';
+import { Redirect } from 'react-router-dom';
+// import { HomePage } from 'app/pages/home';
 import { WorkPage } from 'app/pages/work';
 import { WorkDetailPage } from 'app/pages/work-detail';
 import { AboutPage } from 'app/pages/about';
@@ -8,7 +9,7 @@ export const routes = [
     {
         path: '/',
         exact: true,
-        child: <HomePage />,
+        child: <Redirect to="/work" />,
     },
     {
         path: '/work',
