@@ -3,25 +3,16 @@
     top: 0;
     left: 50%;
     width: 100vw;
-    margin-top: 32px;
-    margin-bottom: 32px;
+    margin: 32px 0;
     color: white;
     transform: translateX(-50%);
     z-index: 1000;
 
     section {
         display: flex;
-        align-items: center;
+        align-items: flex-start;
+        flex-direction: column;
         justify-content: space-between;
-    }
-
-    @media only screen and (min-width: 1440px) {
-        width: 1440px;
-        margin: 32px auto;
-
-        section {
-            margin: 0;
-        }
     }
 
     .logo {
@@ -34,12 +25,7 @@
         color: #fff;
         background-color: initial;
         margin-left: initial;
-    }
-
-    nav {
-        a {
-            margin-right: initial;
-        }
+        margin-bottom: 10px;
     }
 
     a {
@@ -49,7 +35,7 @@
         padding: 6px 8px 4px;
         background-color: #111111;
         color: white;
-        margin-left: 16px;
+        margin-right: 16px;
         text-decoration: none;
         transition: all 0.3s ease-in-out;
 
@@ -65,6 +51,17 @@
             margin-bottom: initial;
             align-items: center;
             flex-direction: initial;
+        }
+
+        nav {
+            a {
+                margin-left: initial;
+                margin-right: 16px;
+            }
+        }
+
+        .logo {
+            margin-bottom: initial;
         }
     }
 }

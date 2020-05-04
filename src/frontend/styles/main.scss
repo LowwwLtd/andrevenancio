@@ -21,10 +21,16 @@ img {
 }
 
 section {
+    max-width: calc(1440px + 0px);
     margin: 0 32px;
+    // border: 1px dashed white;
 
     & > *:first-child {
         margin-top: initial;
+    }
+
+    @media only screen and (min-width: 1504px) {
+        margin: 0 auto;
     }
 }
 

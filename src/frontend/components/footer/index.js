@@ -7,8 +7,11 @@ export const Footer = ({ client }) => {
     return (
         <VFXDom>
             <footer className="footer">
-                ©2020 André Venâncio. All image rights belong to &quot;{client}
-                &quot;.
+                <section>
+                    ©2020 André Venâncio. All image rights belong to &quot;
+                    {client}
+                    &quot;.
+                </section>
             </footer>
         </VFXDom>
     );
