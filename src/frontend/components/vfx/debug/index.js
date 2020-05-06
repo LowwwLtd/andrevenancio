@@ -21,14 +21,14 @@ export class Debug extends PureComponent {
         this.ctx = null;
     }
 
-    resize() {
+    resize(width, height) {
         if (this.canvas.current) {
             const ratio = global.devicePixelRatio || 1;
-            const realWidth = global.innerWidth;
-            const realHeight = document.documentElement.scrollHeight;
-            const width = 100;
+            const realWidth = width;
+            const realHeight = height;
+            const maxWidth = 100;
 
-            this.scale = (width * ratio) / realWidth;
+            this.scale = (maxWidth * ratio) / realWidth;
 
             const targetWidth = Math.round(realWidth * this.scale);
             const targetHeight = Math.round(realHeight * this.scale);
@@ -42,7 +42,7 @@ export class Debug extends PureComponent {
 
     draw() {
         if (this.canvas.current) {
-            this.resize();
+            // this.resize();
 
             this.ctx.clearRect(
                 0,

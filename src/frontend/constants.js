@@ -1,3 +1,11 @@
 import mobile from 'is-mobile';
 
-export const MOBILE = mobile();
+let MOBILE = mobile();
+
+export const setMobile = (value) => {
+    MOBILE = value;
+};
+
+export const getMobile = () => {
+    return MOBILE;
+};

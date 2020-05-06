@@ -7,7 +7,7 @@ import { TweenLite } from 'gsap';
 import imageUrl from '@sanity/image-url';
 import { client } from 'app/sanity';
 import { VFXImage } from 'app/components/vfx/elements';
-import { MOBILE } from 'app/constants';
+import { getMobile } from 'app/constants';
 import './style.scss';
 
 export const Thumbnail = ({ mainImage, title = '', slug = '' }) => {
@@ -33,7 +33,7 @@ export const Thumbnail = ({ mainImage, title = '', slug = '' }) => {
 
     useEffect(() => {
         // html or webgl
-        if (MOBILE) {
+        if (getMobile()) {
             const img = new Image();
             img.onload = () => {
                 domElement.current.appendChild(img);
@@ -57,7 +57,9 @@ export const Thumbnail = ({ mainImage, title = '', slug = '' }) => {
         <Link to={`/work/${slug.current}`} className="thumbnail">
             <div ref={domElement} className="image">
                 <div className="title noselect">{title}</div>
-                {!MOBILE && texture && <VFXImage texture={texture} hover />}
+                {!getMobile() && texture && (
+                    <VFXImage texture={texture} hover />
+                )}
                 <div ref={slide} className="over" />
             </div>
         </Link>

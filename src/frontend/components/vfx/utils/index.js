@@ -1,23 +1,28 @@
+const offset = { x: 0, y: 0 };
 /* returns document offset */
+export const setPageOffset = (x, y) => {
+    offset.x = x;
+    offset.y = y;
+};
+
 export const getPageOffset = () => {
-    const value = { x: 0, y: 0 };
-    if (!global.window || !document) {
-        return { x: 0, y: 0 };
-    }
+    // if (!global.window || !document) {
+    //     return { x: 0, y: 0 };
+    // }
+    // if body is what we need to measure
+    // value.x =
+    //     global.pageXOffset ||
+    //     document.documentElement.scrollLeft ||
+    //     document.body.scrollLeft ||
+    //     0;
+    // value.y =
+    //     global.pageYOffset ||
+    //     document.documentElement.scrollTop ||
+    //     document.body.scrollTop ||
+    //     0;
+    // return value
 
-    value.x =
-        global.pageXOffset ||
-        document.documentElement.scrollLeft ||
-        document.body.scrollLeft ||
-        0;
-
-    value.y =
-        global.pageYOffset ||
-        document.documentElement.scrollTop ||
-        document.body.scrollTop ||
-        0;
-
-    return value;
+    return offset;
 };
 
 /* returns x, y offset of a dom element */

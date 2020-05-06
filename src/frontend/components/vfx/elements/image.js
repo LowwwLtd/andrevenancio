@@ -62,6 +62,7 @@ export class VFXImage extends PureComponent {
                     alt={this.props.alt}
                     onMouseEnter={this.onEnter}
                     onMouseLeave={this.onLeave}
+                    className="noselect"
                     style={{
                         opacity: 0,
                     }}

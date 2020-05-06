@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react';
+import mobile from 'is-mobile';
 import {
     OrthographicCamera,
     Scene,
@@ -19,6 +20,7 @@ import { Context } from '../context';
 import { getPageOffset } from '../utils';
 
 const ratio = global.devicePixelRatio;
+const isMobile = mobile();
 
 const compare = (a, b) => {
     // check array sizes
@@ -63,7 +65,6 @@ export class WebGL extends PureComponent {
     componentDidMount() {
         this.setup();
         this.resize();
-        this.update();
 
         // used to detect if we need to update our child tree
         this.prevContext = this.context;
@@ -90,7 +91,6 @@ export class WebGL extends PureComponent {
             this.handleMouseMove.bind(this),
             false
         );
-        cancelAnimationFrame(this.raf);
     }
 
     setup() {
@@ -164,8 +164,6 @@ export class WebGL extends PureComponent {
     }
 
     update(timestamp) {
-        this.raf = requestAnimationFrame(this.update.bind(this));
-
         // update scroll and mouse calculations
         this.updateScroll();
         this.updateMouse();
@@ -199,6 +197,13 @@ export class WebGL extends PureComponent {
         this.renderer.setRenderTarget(this.bufferTexture);
         this.renderer.render(this.scene, this.camera);
         this.renderer.setRenderTarget(null);
+
+        if (isMobile) {
+            // if its mobile and webgl then we're overriding the mouse and the hover
+            this.mouse.x = 0.5 + 0.5 * Math.cos(Date.now() / 2000);
+            this.mouse.y = 0.5;
+            this.material.uniforms.hover.value = 1;
+        }
 
         // uniforms
         this.material.uniforms.resolution.value.x = this.width;
@@ -248,17 +253,21 @@ export class WebGL extends PureComponent {
     }
 
     hover() {
-        TweenLite.to(this.material.uniforms.hover, 0.5, {
-            value: 1,
-            ease: 'Power2.easeInOut',
-        });
+        if (!isMobile) {
+            TweenLite.to(this.material.uniforms.hover, 0.5, {
+                value: 1,
+                ease: 'Power2.easeInOut',
+            });
+        }
     }
 
     out() {
-        TweenLite.to(this.material.uniforms.hover, 0.5, {
-            value: 0,
-            ease: 'Power2.easeInOut',
-        });
+        if (!isMobile) {
+            TweenLite.to(this.material.uniforms.hover, 0.5, {
+                value: 0,
+                ease: 'Power2.easeInOut',
+            });
+        }
     }
 
     resize() {

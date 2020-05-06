@@ -7,7 +7,6 @@ body {
     font-family: 'SpaceGrotesk-Regular', sans-serif;
     background-color: #151517;
     color: white;
-    overflow-x: hidden;
 }
 
 * {
@@ -23,10 +22,14 @@ img {
 
 section {
     max-width: 1440px;
-    margin: 0 32px;
+    margin: 0 16px;
 
     & > *:first-child {
         margin-top: initial;
+    }
+
+    @media only screen and (min-width: 768px) {
+        margin: 0 32px;
     }
 
     @media only screen and (min-width: 1504px) {
@@ -68,4 +71,24 @@ nav {
 
 ::selection {
     background: #999;
+}
+
+// making it scroll
+html,
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+#app {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden;
+    overflow-y: scroll;
 }

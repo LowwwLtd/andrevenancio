@@ -15,8 +15,8 @@
 
         .title {
             position: absolute;
-            top: 32px;
-            left: 32px;
+            top: 16px;
+            left: 16px;
             z-index: 1;
             pointer-events: none;
         }
@@ -36,6 +36,11 @@
         .image {
             width: calc(100vw / 4);
             height: calc(100vw / 4);
+
+            .title {
+                top: 16px;
+                left: 32px;
+            }
         }
     }
 }

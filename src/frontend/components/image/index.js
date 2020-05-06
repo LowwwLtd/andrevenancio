@@ -4,7 +4,7 @@ import React, { useRef, useEffect, useState } from 'react';
 import { TextureLoader, LinearFilter } from 'three';
 import { TweenLite } from 'gsap';
 import { VFXImage } from 'app/components/vfx/elements';
-import { MOBILE } from 'app/constants';
+import { getMobile } from 'app/constants';
 import './style.scss';
 
 export const ImageComponent = ({ src, alt }) => {
@@ -27,7 +27,7 @@ export const ImageComponent = ({ src, alt }) => {
 
     useEffect(() => {
         // html or webgl
-        if (MOBILE) {
+        if (getMobile()) {
             const img = new Image();
             img.onload = () => {
                 domElement.current.appendChild(img);
@@ -49,7 +49,7 @@ export const ImageComponent = ({ src, alt }) => {
 
     return (
         <div ref={domElement} className="image">
-            {!MOBILE && texture && (
+            {!getMobile() && texture && (
                 <VFXImage texture={texture} alt={alt} hover />
             )}
             <div ref={slide} className="over" />

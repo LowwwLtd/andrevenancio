@@ -26,6 +26,11 @@ const start = () => {
 
     console.log(...args);
 
+    // avoids zoom
+    document.addEventListener('gesturestart', (e) => {
+        e.preventDefault();
+    });
+
     gsap.registerPlugin(CSSPlugin);
 
     render(
