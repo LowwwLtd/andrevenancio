@@ -65,7 +65,7 @@
         "html-webpack-plugin": "^4.0.4",
         "mini-css-extract-plugin": "^0.9.0",
         "node-sass": "^4.13.1",
-        "nodemon": "^2.0.2",
+        "nodemon": "^2.0.22",
         "optimize-css-assets-webpack-plugin": "^5.0.3",
         "raw-loader": "^4.0.0",
         "rimraf": "^3.0.2",
